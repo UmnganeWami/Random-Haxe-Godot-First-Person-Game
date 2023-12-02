@@ -1,0 +1,2 @@
+scale: 0.521
+jitter scale: 0.454

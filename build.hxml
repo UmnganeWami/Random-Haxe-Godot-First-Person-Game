@@ -1,0 +1,6 @@
+--library gdscript
+--class-path src
+com.wami
+#-D gdscript_untyped
+-D gdscript-output=out
+-D reflaxe_measure

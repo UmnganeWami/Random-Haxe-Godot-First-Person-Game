@@ -1,0 +1,43 @@
+[gd_resource type="VisualShader" load_steps=4 format=3 uid="uid://btws07ayrj6hu"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_cpbtg"]
+output_port_for_preview = 0
+expanded_output_ports = [0]
+source = 5
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_78vu6"]
+parameter_name = "Texture2DParameter"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_1qxi7"]
+input_name = "uv"
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform sampler2D Texture2DParameter;
+
+
+
+void fragment() {
+	vec4 n_out18p0;
+// Texture2D:18
+	n_out18p0 = texture(Texture2DParameter, UV);
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out18p0.xyz);
+
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(3060, 620)
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_1qxi7")
+nodes/fragment/2/position = Vector2(1860, 740)
+nodes/fragment/18/node = SubResource("VisualShaderNodeTexture_cpbtg")
+nodes/fragment/18/position = Vector2(2780, 580)
+nodes/fragment/19/node = SubResource("VisualShaderNodeTexture2DParameter_78vu6")
+nodes/fragment/19/position = Vector2(2240, 600)
+nodes/fragment/connections = PackedInt32Array(18, 0, 0, 0, 19, 0, 18, 2)

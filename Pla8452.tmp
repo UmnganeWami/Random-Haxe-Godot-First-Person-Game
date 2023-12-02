@@ -1,0 +1,85 @@
+[gd_scene load_steps=14 format=3 uid="uid://bx5ovm83tv6xl"]
+
+[ext_resource type="Script" path="res://out/com_WamiController.gd" id="1_esecs"]
+[ext_resource type="AudioStream" uid="uid://bkvrlco5ktx8i" path="res://assets/snd/step1.wav" id="2_0ymkn"]
+[ext_resource type="Shader" path="res://assets/shade/meow.gdshader" id="2_knktm"]
+[ext_resource type="Script" path="res://out/com_InteractArea.gd" id="2_nvi7x"]
+[ext_resource type="AudioStream" uid="uid://ba76ill8y5un6" path="res://assets/snd/step2.wav" id="3_67ntb"]
+[ext_resource type="AudioStream" uid="uid://cwet3k34e3njv" path="res://assets/snd/step3.wav" id="4_scw5c"]
+[ext_resource type="AudioStream" uid="uid://bg83d1vam3m1f" path="res://assets/snd/jump.wav" id="5_6pq0a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j31bq"]
+size = Vector3(1, 1, 1.68213)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o77fw"]
+shader = ExtResource("2_knktm")
+shader_parameter/scale = 0.449
+shader_parameter/jitter_strength = 0.002
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mxfu7"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_d2phv"]
+random_pitch = 1.1
+random_volume_offset_db = 5.0
+streams_count = 3
+stream_0/stream = ExtResource("2_0ymkn")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("3_67ntb")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("4_scw5c")
+stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rhirh"]
+random_pitch = 1.25
+random_volume_offset_db = 5.0
+streams_count = 1
+stream_0/stream = ExtResource("5_6pq0a")
+stream_0/weight = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wbh5g"]
+size = Vector3(1, 0.318359, 1)
+
+[node name="WamiController" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1876, 0)
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_esecs")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.553186, 0)
+
+[node name="InteractArea" type="Area3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.553186, 0)
+script = ExtResource("2_nvi7x")
+
+[node name="HoldPlacement" type="Node3D" parent="Camera3D/InteractArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.600369, -1.82333)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/InteractArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.553186, -1.24121)
+shape = SubResource("BoxShape3D_j31bq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
+
+[node name="ColorRect" type="ColorRect" parent="Camera3D/CanvasLayer"]
+material = SubResource("ShaderMaterial_o77fw")
+use_parent_material = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_mxfu7")
+
+[node name="FootStep" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_d2phv")
+volume_db = -11.971
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_rhirh")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.663909, 0)
+shape = SubResource("BoxShape3D_wbh5g")

@@ -1,0 +1,97 @@
+/**
+	Generated using Godot Bindings Generator for Haxe.
+	https://github.com/SomeRanDev/Haxe-GodotBindingsGenerator
+**/
+package godot;
+@:generated_godot_api @:bindings_api_type("class") @:is_refcounted(true) @:is_instantiable(true) @:api_type("core") @:is_resource(true) @:is_node(false) extern class Skin extends godot.Resource {
+	@:is_const(false)
+	@:is_static(false)
+	@:is_vararg(false)
+	@:is_virtual(false)
+	@:hash(1286410249)
+	@:hash_compatibility(null)
+	@:argMeta(0, ":meta"("int32"))
+	public function set_bind_count(@:meta("int32") bind_count:Int):Void;
+	@:return_value_meta("int32")
+	@:is_const(true)
+	@:is_static(false)
+	@:is_vararg(false)
+	@:is_virtual(false)
+	@:hash(3905245786.)
+	@:hash_compatibility(null)
+	public function get_bind_count():Int;
+	@:is_const(false)
+	@:is_static(false)
+	@:is_vararg(false)
+	@:is_virtual(false)
+	@:hash(3616898986.)
+	@:hash_compatibility(null)
+	@:argMeta(0, ":meta"("int32"))
+	public function add_bind(@:meta("int32") bone:Int, pose:godot.Transform3D):Void;
+	@:is_const(false)
+	@:is_static(false)
+	@:is_vararg(false)
+	@:is_virtual(false)
+	@:hash(3154712474.)
+	@:hash_compatibility(null)
+	public function add_named_bind(name:String, pose:godot.Transform3D):Void;
+	@:is_const(false)
+	@:is_static(false)
+	@:is_vararg(false)
+	@:is_virtual(false)
+	@:hash(3616898986.)
+	@:hash_compatibility(null)
+	@:argMeta(0, ":meta"("int32"))
+	public function set_bind_pose(@:meta("int32") bind_index:Int, pose:godot.Transform3D):Void;
+	@:return_value_meta(null)
+	@:is_const(true)
+	@:is_static(false)
+	@:is_vararg(false)
+	@:is_virtual(false)
+	@:hash(1965739696)
+	@:hash_compatibility(null)
+	@:argMeta(0, ":meta"("int32"))
+	public function get_bind_pose(@:meta("int32") bind_index:Int):godot.Transform3D;
+	@:is_const(false)
+	@:is_static(false)
+	@:is_vararg(false)
+	@:is_virtual(false)
+	@:hash(3780747571.)
+	@:hash_compatibility(null)
+	@:argMeta(0, ":meta"("int32"))
+	public function set_bind_name(@:meta("int32") bind_index:Int, name:godot.StringName):Void;
+	@:return_value_meta(null)
+	@:is_const(true)
+	@:is_static(false)
+	@:is_vararg(false)
+	@:is_virtual(false)
+	@:hash(659327637)
+	@:hash_compatibility(null)
+	@:argMeta(0, ":meta"("int32"))
+	public function get_bind_name(@:meta("int32") bind_index:Int):godot.StringName;
+	@:is_const(false)
+	@:is_static(false)
+	@:is_vararg(false)
+	@:is_virtual(false)
+	@:hash(3937882851.)
+	@:hash_compatibility(null)
+	@:argMeta(0, ":meta"("int32"))
+	@:argMeta(1, ":meta"("int32"))
+	public function set_bind_bone(@:meta("int32") bind_index:Int, @:meta("int32") bone:Int):Void;
+	@:return_value_meta("int32")
+	@:is_const(true)
+	@:is_static(false)
+	@:is_vararg(false)
+	@:is_virtual(false)
+	@:hash(923996154)
+	@:hash_compatibility(null)
+	@:argMeta(0, ":meta"("int32"))
+	public function get_bind_bone(@:meta("int32") bind_index:Int):Int;
+	@:is_const(false)
+	@:is_static(false)
+	@:is_vararg(false)
+	@:is_virtual(false)
+	@:hash(3218959716.)
+	@:hash_compatibility(null)
+	public function clear_binds():Void;
+}
