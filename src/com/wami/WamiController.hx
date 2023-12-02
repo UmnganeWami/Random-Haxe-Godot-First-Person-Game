@@ -67,11 +67,11 @@ class WamiController extends CharacterBody3D{
     }
 
     override function _physics_process(delta:Float) {
-        var isForward = Input.is_action_pressed(new StringName("move_forward"));
-        var isBackward = Input.is_action_pressed(new StringName("move_backward"));
-        var isLeft = Input.is_action_pressed(new StringName("move_left"));
-        var isRight = Input.is_action_pressed(new StringName("move_right"));
-        var isJump = Input.is_action_just_pressed(new StringName("move_jump"));
+        var isForward = Input.is_action_pressed("move_forward");
+        var isBackward = Input.is_action_pressed("move_backward");
+        var isLeft = Input.is_action_pressed("move_left");
+        var isRight = Input.is_action_pressed("move_right");
+        var isJump = Input.is_action_just_pressed("move_jump");
         this.onFloor = this.is_on_floor();
 
         if(isForward && !isBackward){
@@ -119,7 +119,7 @@ class WamiController extends CharacterBody3D{
         targetVelocity.x = limitVel(targetVelocity.x, MAX_VELOCITY * 1.50);
         targetVelocity.z = limitVel(targetVelocity.z, MAX_VELOCITY * 1.50);
 
-        var direction:Vector3 = (globalTransform.basis.z * targetVelocity.z) + (globalTransform.basis.x * targetVelocity.x);//GlobalFuncs.plusVectors(GlobalFuncs.timesVectors(globalTransform.basis.z, targetVelocity.z), GlobalFuncs.timesVectors(globalTransform.basis.x, targetVelocity.x));
+        var direction:Vector3 = (globalTransform.basis.z * targetVelocity.z) + (globalTransform.basis.x * targetVelocity.x);
         var dirNormal = direction * SPEED;
         velocity = new Vector3(dirNormal.x, velocity.y, dirNormal.z);
 

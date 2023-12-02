@@ -21,7 +21,7 @@ class PausePlayNode extends Control{
     }
 
     override function _process(delta:Float) {
-        if(Input.is_action_just_pressed(new StringName("ui_pause"))){
+        if(Input.is_action_just_pressed("ui_pause")){
             if(pause_menu.visible){
                 Input.set_mouse_mode(MOUSE_MODE_CAPTURED);
                 resume_game();

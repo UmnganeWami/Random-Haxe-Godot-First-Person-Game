@@ -18,11 +18,11 @@ class InteractArea extends Area3D{
     var holdPlace:Node3D = null;
     var forceTimes:Float = 0.25;
     override function _ready(){
-        colShape = cast get_node(new NodePath("CollisionShape3D"));
-        holdPlace = cast get_node(new NodePath("HoldPlacement"));
+        colShape = cast get_node("CollisionShape3D");
+        holdPlace = cast get_node("HoldPlacement");
 
-        connect(new StringName("body_entered"), cast _on_body_entered);
-        connect(new StringName("body_exited"), cast _on_body_exited);
+        connect("body_entered", cast _on_body_entered);
+        connect("body_exited", cast _on_body_exited);
     }
 
     public function _on_body_entered(body:Dynamic){
@@ -40,8 +40,8 @@ class InteractArea extends Area3D{
     }
 
     override function _physics_process(delta:Float) {
-        var isHold = Input.is_action_just_pressed(new StringName("hold_box"));
-        var isHoldUndone = Input.is_action_just_released(new StringName("hold_box"));
+        var isHold = Input.is_action_just_pressed("hold_box");
+        var isHoldUndone = Input.is_action_just_released("hold_box");
         if(isHold && collidingBodies.length > 0){
             grabbed_body = collidingBodies[0];
             trace("holding_thing_now");
