@@ -2,3 +2,4 @@
 .godot/
 out/
 src/godot/
+src/extension_api.json
