@@ -42,25 +42,3 @@ class PausePlayNode extends Control{
         pause_menu.hide();
     }
 }
-/*
-var pause_menu : Control
-
-func _ready():
-    pause_menu = preload("res://PauseMenu.tscn")
-    add_child(pause_menu)
-    pause_menu.hide()
-
-func _process(delta):
-    if Input.is_action_just_pressed("ui_pause"):
-        if pause_menu.visible:
-            resume_game()
-        else:
-            pause_game()
-
-func pause_game():
-    get_tree().paused = true
-    pause_menu.show()
-
-func resume_game():
-    get_tree().paused = false
-    pause_menu.hide()*/

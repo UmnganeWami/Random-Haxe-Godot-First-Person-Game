@@ -93,26 +93,18 @@ class WamiController extends CharacterBody3D{
         var shouldKeepLerping:Bool = false;
         if(!this.onFloor){
             var downMotion = StaticProjectVars.Gravity * delta;
-            velocity.y -= downMotion; //velocity.y - downMotion;
+            velocity.y -= downMotion;
             footStepTimer = 0;
         }else if((isBackward || isForward || isLeft || isRight) && !(isForward && isBackward) && !(isLeft && isRight)){
             footStepTimer-=0.1;
-            //shouldKeepLerping = true;
             if(footStepTimer<=0){
                 footStepTimer = maxFootStepTimerTillTickOver;
                 stepSnd.play();
             }
         }else{
             footStepTimer = 0;
-            //if(Std.int(Math.sin(footStepTimer)) != 0){
-            //    shouldKeepLerping = true;
-            //}
-            //sinTimer = Godot.lerp(sinTimer, 0.0, 0.25);
         }
 
-        //if(shouldKeepLerping){
-        //    sinTimer += (delta * 35);
-        //}
         sinTimer = Godot.lerp(sinTimer, maxFootStepTimerTillTickOver - footStepTimer, 0.25);
         camera_3d.position.y = 0.50 + (Math.sin(sinTimer) * 0.35);
 
