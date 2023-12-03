@@ -139,6 +139,7 @@ class WamiController extends CharacterBody3D{
         targetVelocity.z = limitVel(targetVelocity.z, MAX_VELOCITY * 1.50);
 
         var direction:Vector3 = (globalTransform.basis.z * targetVelocity.z) + (globalTransform.basis.x * targetVelocity.x);
+        camera_3d.rotation.z = Godot.lerp(camera_3d.rotation.z, -targetVelocity.x * 0.025, 10 * delta);
         var dirNormal = direction * SPEED / (isCrouching && onFloor ? 2 : 1);
         velocity = new Vector3(dirNormal.x, velocity.y, dirNormal.z);
 

@@ -16,6 +16,8 @@ size = Vector3(1, 1, 3.06909)
 shader = ExtResource("2_knktm")
 shader_parameter/scale = 0.521
 shader_parameter/jitter_strength = 0.454
+shader_parameter/time_between_jit = 15.237
+shader_parameter/doRanom = true
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wfuap"]
 radius = 1.0
