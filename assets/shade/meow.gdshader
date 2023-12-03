@@ -15,8 +15,10 @@ void fragment() {
     // Downscale resolution
     uv = floor(uv * screen_size * scale) / (screen_size * scale);
     
+	//for the effect of changing only every few secs
+	float realTime = TIME - mod(TIME, 0.2);
     // Add jitter
-    vec2 jitter = vec2(rand(uv * TIME), rand(uv * TIME + vec2(1.0, 0.0)));
+    vec2 jitter = vec2(rand(uv * realTime), rand(uv * realTime + vec2(1.0, 0.0)));
 	float real_jitter_strength = jitter_strength / 100.0;
     uv += (jitter * real_jitter_strength);// / scale;
     

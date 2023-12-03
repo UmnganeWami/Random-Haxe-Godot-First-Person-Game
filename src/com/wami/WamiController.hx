@@ -1,5 +1,8 @@
 package com.wami;
 
+import godot.MeshInstance3D;
+import godot.Tween;
+import godot.CollisionShape3D;
 import godot.RigidBody2D;
 import godot.PhysicsRayQueryParameters3D;
 import godot.MouseButton;
@@ -29,12 +32,21 @@ class WamiController extends CharacterBody3D{
     var camera_3d:Camera3D;
     var stepSnd:AudioStreamPlayer;
     var jumpSnd:AudioStreamPlayer;
+    var selfOrigonalSize:Vector3;
     var sinTimer:Float = 0.0;
+    var selfCollider:CollisionShape3D;
+    var beanObject:MeshInstance3D;
+    var isCrouching:Bool = false;
 
     override function _ready(){
-        camera_3d = cast get_node(new NodePath("Camera3D"));
-        stepSnd = cast get_node(new NodePath("FootStep"));
-        jumpSnd = cast get_node(new NodePath("Jump"));
+        camera_3d = cast get_node("Camera3D");
+        stepSnd = cast get_node("FootStep");
+        jumpSnd = cast get_node("Jump");
+
+        selfCollider = cast get_node("Collider");
+        beanObject = cast get_node("Collider/Mesh");
+
+        selfOrigonalSize = this.scale;
 
         trace("i hope this is correct");
         trace(limitVel(50, 10), "should be 10.");
@@ -66,12 +78,19 @@ class WamiController extends CharacterBody3D{
         return (thing is RigidBody3D);
     }
 
+    var crouchHeight:Float = 1.5;
+    var nonCrouchHeight:Float = 2;
+
+
     override function _physics_process(delta:Float) {
         var isForward = Input.is_action_pressed("move_forward");
         var isBackward = Input.is_action_pressed("move_backward");
         var isLeft = Input.is_action_pressed("move_left");
         var isRight = Input.is_action_pressed("move_right");
         var isJump = Input.is_action_just_pressed("move_jump");
+        var isCrouch = Input.is_action_just_pressed("move_crouch");
+        var isUnCrouch = Input.is_action_just_released("move_crouch");
+
         this.onFloor = this.is_on_floor();
 
         if(isForward && !isBackward){
@@ -96,7 +115,7 @@ class WamiController extends CharacterBody3D{
             velocity.y -= downMotion;
             footStepTimer = 0;
         }else if((isBackward || isForward || isLeft || isRight) && !(isForward && isBackward) && !(isLeft && isRight)){
-            footStepTimer-=0.1;
+            footStepTimer -= (0.1 / (isCrouching ? 2 : 1));
             if(footStepTimer<=0){
                 footStepTimer = maxFootStepTimerTillTickOver;
                 stepSnd.play();
@@ -106,7 +125,7 @@ class WamiController extends CharacterBody3D{
         }
 
         sinTimer = Godot.lerp(sinTimer, maxFootStepTimerTillTickOver - footStepTimer, 0.25);
-        camera_3d.position.y = 0.50 + (Math.sin(sinTimer) * 0.35);
+        camera_3d.position.y = (((selfCollider:Dynamic).shape.height / 2) * 0.50) + (Math.sin(sinTimer) * 0.35);
 
         if (((isBackward && isForward) || (!isBackward && !isForward)) && onFloor){
             targetVelocity.z = Godot.lerp(targetVelocity.z, 0.0, 0.25);
@@ -120,8 +139,29 @@ class WamiController extends CharacterBody3D{
         targetVelocity.z = limitVel(targetVelocity.z, MAX_VELOCITY * 1.50);
 
         var direction:Vector3 = (globalTransform.basis.z * targetVelocity.z) + (globalTransform.basis.x * targetVelocity.x);
-        var dirNormal = direction * SPEED;
+        var dirNormal = direction * SPEED / (isCrouching && onFloor ? 2 : 1);
         velocity = new Vector3(dirNormal.x, velocity.y, dirNormal.z);
+
+
+        if(isCrouch){
+            var t:Tween = create_tween();
+            t.tween_property(selfCollider.shape, "height", crouchHeight, 0.2);
+        }else if(isUnCrouch){
+            var t:Tween = create_tween();
+            t.tween_property(selfCollider.shape, "height", nonCrouchHeight, 0.2);
+        }
+
+        if(!isCrouching){
+            if((selfCollider:Dynamic).shape.height == crouchHeight){
+                isCrouching = true;
+            }
+        }else{
+            if((selfCollider:Dynamic).shape.height == nonCrouchHeight){
+                isCrouching = false;
+            }
+        }
+
+        (beanObject:Dynamic).mesh.height = (selfCollider:Dynamic).shape.height;
 
         move_and_slide();
 

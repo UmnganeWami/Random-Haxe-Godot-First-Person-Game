@@ -18,6 +18,7 @@ shader_parameter/scale = 0.521
 shader_parameter/jitter_strength = 0.454
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wfuap"]
+radius = 1.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_atexe"]
 
@@ -79,10 +80,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Collider" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_wfuap")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+[node name="Mesh" type="MeshInstance3D" parent="Collider"]
 mesh = SubResource("CapsuleMesh_atexe")
 
 [node name="FootStep" type="AudioStreamPlayer" parent="."]

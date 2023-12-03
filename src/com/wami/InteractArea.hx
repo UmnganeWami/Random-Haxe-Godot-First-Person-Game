@@ -44,7 +44,7 @@ class InteractArea extends Area3D{
         var isHoldUndone = Input.is_action_just_released("hold_box");
         if(isHold && collidingBodies.length > 0){
             grabbed_body = collidingBodies[0];
-            trace("holding_thing_now");
+            trace("holding thing now");
         }
         if(isHoldUndone && grabbed_body != null){
             grabbed_body = null;
@@ -56,7 +56,6 @@ class InteractArea extends Area3D{
             var force = (((target_position - grabbed_body.global_transform.origin) * 1) / delta) * forceTimes;
             grabbed_body.apply_central_impulse((force - grabbed_body.linear_velocity) * grabbed_body.mass);
             grabbed_body.global_rotation = this.global_rotation;
-            //grabbed_body.global_rotation = grabbed_body.global_rotation.lerp(this.global_rotation, 0.25); //this.global_rotation;
         }
     }
 }
