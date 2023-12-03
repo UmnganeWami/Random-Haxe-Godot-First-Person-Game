@@ -40,6 +40,7 @@ class WamiController extends CharacterBody3D{
 
     override function _ready(){
         camera_3d = cast get_node("Camera3D");
+        //camera_3d.projection
         stepSnd = cast get_node("FootStep");
         jumpSnd = cast get_node("Jump");
 
@@ -139,7 +140,9 @@ class WamiController extends CharacterBody3D{
         targetVelocity.z = limitVel(targetVelocity.z, MAX_VELOCITY * 1.50);
 
         var direction:Vector3 = (globalTransform.basis.z * targetVelocity.z) + (globalTransform.basis.x * targetVelocity.x);
-        camera_3d.rotation.z = Godot.lerp(camera_3d.rotation.z, -targetVelocity.x * 0.025, 10 * delta);
+        this.rotation.z = Godot.lerp(this.rotation.z, -targetVelocity.x * 0.025, 10 * delta);
+        this.rotation.x = Godot.lerp(this.rotation.x, targetVelocity.z * 0.025, 10 * delta);
+
         var dirNormal = direction * SPEED / (isCrouching && onFloor ? 2 : 1);
         velocity = new Vector3(dirNormal.x, velocity.y, dirNormal.z);
 

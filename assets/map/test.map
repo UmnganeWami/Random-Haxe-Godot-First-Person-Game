@@ -7,12 +7,12 @@
 "_tb_textures" "textures;textures/Concrete/Materials;textures/Ground/Materials;textures/Tiles/Materials;textures/special"
 // brush 0
 {
-( -868 -64 -16 ) ( -868 -63 -16 ) ( -868 -64 -15 ) Ground/Materials/grass_03 0 0 0 1 1
-( -64 -992 -16 ) ( -64 -992 -15 ) ( -63 -992 -16 ) Ground/Materials/grass_03 0 0 0 1 1
-( -64 -64 -16 ) ( -63 -64 -16 ) ( -64 -63 -16 ) Ground/Materials/grass_03 0 0 0 1 1
-( 64 64 0 ) ( 64 65 0 ) ( 65 64 0 ) Ground/Materials/grass_03 0 0 0 1 1
-( 64 984 16 ) ( 65 984 16 ) ( 64 984 17 ) Ground/Materials/grass_03 0 0 0 1 1
-( 864 64 16 ) ( 864 64 17 ) ( 864 65 16 ) Ground/Materials/grass_03 0 0 0 1 1
+( -868 -64 -16 ) ( -868 -63 -16 ) ( -868 -64 -15 ) Ground/Materials/grass_02 0 0 0 1 1
+( -64 -992 -16 ) ( -64 -992 -15 ) ( -63 -992 -16 ) Ground/Materials/grass_02 0 0 0 1 1
+( -64 -64 -16 ) ( -63 -64 -16 ) ( -64 -63 -16 ) Ground/Materials/grass_02 0 0 0 1 1
+( 64 64 0 ) ( 64 65 0 ) ( 65 64 0 ) Ground/Materials/grass_02 0 0 0 1 1
+( 64 984 16 ) ( 65 984 16 ) ( 64 984 17 ) Ground/Materials/grass_02 0 0 0 1 1
+( 864 64 16 ) ( 864 64 17 ) ( 864 65 16 ) Ground/Materials/grass_02 0 0 0 1 1
 }
 // brush 1
 {
