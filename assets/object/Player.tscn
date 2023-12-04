@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bx5ovm83tv6xl"]
+[gd_scene load_steps=16 format=3 uid="uid://bx5ovm83tv6xl"]
 
 [ext_resource type="Script" path="res://out/com_WamiController.gd" id="1_esecs"]
 [ext_resource type="AudioStream" uid="uid://bkvrlco5ktx8i" path="res://assets/snd/step1.wav" id="2_0ymkn"]
@@ -19,8 +19,7 @@ shader_parameter/jitter_strength = 0.454
 shader_parameter/time_between_jit = 15.237
 shader_parameter/doRanom = true
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wfuap"]
-radius = 1.0
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3j3bb"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_atexe"]
 
@@ -41,6 +40,9 @@ random_volume_offset_db = 5.0
 streams_count = 1
 stream_0/stream = ExtResource("5_6pq0a")
 stream_0/weight = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y8tek"]
+height = 1.156
 
 [node name="WamiController" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1876, 0)
@@ -83,7 +85,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Collider" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_wfuap")
+shape = SubResource("CapsuleShape3D_3j3bb")
 
 [node name="Mesh" type="MeshInstance3D" parent="Collider"]
 mesh = SubResource("CapsuleMesh_atexe")
@@ -95,3 +97,10 @@ volume_db = -14.214
 [node name="Jump" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_rhirh")
 volume_db = -21.517
+
+[node name="FullCollisionArea" type="Area3D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FullCollisionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.421954, 0)
+shape = SubResource("CapsuleShape3D_y8tek")
