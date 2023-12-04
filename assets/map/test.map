@@ -370,61 +370,61 @@
 ( 144 528 96 ) ( 144 1168 80 ) ( 144 1168 96 ) Ground/Materials/gravel_04 -32 16 0 1 1
 ( 192 528 96 ) ( -752 528 80 ) ( -752 528 96 ) Ground/Materials/gravel_04 0 16 0 1 1
 ( 192 1168 16 ) ( -752 528 16 ) ( 192 528 16 ) Ground/Materials/gravel_04 0 32 0 1 1
-( 192 1168 160 ) ( -752 528 160 ) ( -752 1168 160 ) Ground/Materials/gravel_04 0 32 0 1 1
+( 192 1168 144 ) ( -752 528 144 ) ( -752 1168 144 ) Ground/Materials/gravel_04 0 32 0 1 1
 ( 192 544 96 ) ( -752 544 80 ) ( 192 544 80 ) Ground/Materials/gravel_04 0 16 0 1 1
 ( 784 1168 96 ) ( 784 528 80 ) ( 784 528 96 ) Ground/Materials/gravel_04 -32 16 0 1 1
 }
 // brush 41
 {
-( 144 528 160 ) ( 144 1168 144 ) ( 144 1168 160 ) Ground/Materials/gravel_04 -32 16 0 1 1
-( 192 544 160 ) ( -752 544 144 ) ( -752 544 160 ) Ground/Materials/gravel_04 0 16 0 1 1
-( 192 1168 144 ) ( -752 528 144 ) ( 192 528 144 ) Ground/Materials/gravel_04 0 32 0 1 1
-( 192 1168 160 ) ( -752 528 160 ) ( -752 1168 160 ) Ground/Materials/gravel_04 0 32 0 1 1
-( 192 624 160 ) ( -752 624 144 ) ( 192 624 144 ) Ground/Materials/gravel_04 0 16 0 1 1
-( 784 1168 160 ) ( 784 528 144 ) ( 784 528 160 ) Ground/Materials/gravel_04 -32 16 0 1 1
+( 144 528 144 ) ( 144 1168 128 ) ( 144 1168 144 ) Ground/Materials/gravel_04 -32 0 0 1 1
+( 192 544 144 ) ( -752 544 128 ) ( -752 544 144 ) Ground/Materials/gravel_04 0 0 0 1 1
+( 192 1168 128 ) ( -752 528 128 ) ( 192 528 128 ) Ground/Materials/gravel_04 0 32 0 1 1
+( 192 1168 144 ) ( -752 528 144 ) ( -752 1168 144 ) Ground/Materials/gravel_04 0 32 0 1 1
+( 192 624 144 ) ( -752 624 128 ) ( 192 624 128 ) Ground/Materials/gravel_04 0 0 0 1 1
+( 784 1168 144 ) ( 784 528 128 ) ( 784 528 144 ) Ground/Materials/gravel_04 -32 0 0 1 1
 }
 // brush 42
 {
 ( 144 624 96 ) ( 144 1264 80 ) ( 144 1264 96 ) Ground/Materials/gravel_04 0 16 0 1 1
 ( 192 624 96 ) ( -752 624 80 ) ( -752 624 96 ) Ground/Materials/gravel_04 0 16 0 1 1
 ( 192 1264 16 ) ( -752 624 16 ) ( 192 624 16 ) Ground/Materials/gravel_04 0 0 0 1 1
-( 192 1264 176 ) ( -752 624 176 ) ( -752 1264 176 ) Ground/Materials/gravel_04 0 0 0 1 1
+( 192 1264 160 ) ( -752 624 160 ) ( -752 1264 160 ) Ground/Materials/gravel_04 0 0 0 1 1
 ( 192 640 96 ) ( -752 640 80 ) ( 192 640 80 ) Ground/Materials/gravel_04 0 16 0 1 1
 ( 784 1264 96 ) ( 784 624 80 ) ( 784 624 96 ) Ground/Materials/gravel_04 0 16 0 1 1
 }
 // brush 43
 {
-( 144 624 176 ) ( 144 1264 160 ) ( 144 1264 176 ) Ground/Materials/gravel_04 0 32 0 1 1
-( 192 640 176 ) ( -752 640 160 ) ( -752 640 176 ) Ground/Materials/gravel_04 0 32 0 1 1
-( 192 1264 160 ) ( -752 624 160 ) ( 192 624 160 ) Ground/Materials/gravel_04 0 0 0 1 1
-( 192 1264 176 ) ( -752 624 176 ) ( -752 1264 176 ) Ground/Materials/gravel_04 0 0 0 1 1
-( 192 720 176 ) ( -752 720 160 ) ( 192 720 160 ) Ground/Materials/gravel_04 0 32 0 1 1
-( 784 1264 176 ) ( 784 624 160 ) ( 784 624 176 ) Ground/Materials/gravel_04 0 32 0 1 1
+( 144 624 160 ) ( 144 1264 144 ) ( 144 1264 160 ) Ground/Materials/gravel_04 0 16 0 1 1
+( 192 640 160 ) ( -752 640 144 ) ( -752 640 160 ) Ground/Materials/gravel_04 0 16 0 1 1
+( 192 1264 144 ) ( -752 624 144 ) ( 192 624 144 ) Ground/Materials/gravel_04 0 0 0 1 1
+( 192 1264 160 ) ( -752 624 160 ) ( -752 1264 160 ) Ground/Materials/gravel_04 0 0 0 1 1
+( 192 720 160 ) ( -752 720 144 ) ( 192 720 144 ) Ground/Materials/gravel_04 0 16 0 1 1
+( 784 1264 160 ) ( 784 624 144 ) ( 784 624 160 ) Ground/Materials/gravel_04 0 16 0 1 1
 }
 // brush 44
 {
 ( 144 720 96 ) ( 144 1360 80 ) ( 144 1360 96 ) Ground/Materials/gravel_04 32 16 0 1 1
 ( 192 720 96 ) ( -752 720 80 ) ( -752 720 96 ) Ground/Materials/gravel_04 0 16 0 1 1
 ( 192 1360 16 ) ( -752 720 16 ) ( 192 720 16 ) Ground/Materials/gravel_04 0 -32 0 1 1
-( 192 1360 192 ) ( -752 720 192 ) ( -752 1360 192 ) Ground/Materials/gravel_04 0 -32 0 1 1
+( 192 1360 176 ) ( -752 720 176 ) ( -752 1360 176 ) Ground/Materials/gravel_04 0 -32 0 1 1
 ( 192 736 96 ) ( -752 736 80 ) ( 192 736 80 ) Ground/Materials/gravel_04 0 16 0 1 1
 ( 784 1360 96 ) ( 784 720 80 ) ( 784 720 96 ) Ground/Materials/gravel_04 32 16 0 1 1
 }
 // brush 45
 {
-( 144 720 192 ) ( 144 1360 176 ) ( 144 1360 192 ) Ground/Materials/gravel_04 -32 48 0 1 1
-( 192 736 192 ) ( -752 736 176 ) ( -752 736 192 ) Ground/Materials/gravel_04 0 48 0 1 1
-( 192 1360 176 ) ( -752 720 176 ) ( 192 720 176 ) Ground/Materials/gravel_04 0 32 0 1 1
-( 192 1360 192 ) ( -752 720 192 ) ( -752 1360 192 ) Ground/Materials/gravel_04 0 32 0 1 1
-( 192 816 192 ) ( -752 816 176 ) ( 192 816 176 ) Ground/Materials/gravel_04 0 48 0 1 1
-( 784 1360 192 ) ( 784 720 176 ) ( 784 720 192 ) Ground/Materials/gravel_04 -32 48 0 1 1
+( 144 720 176 ) ( 144 1360 160 ) ( 144 1360 176 ) Ground/Materials/gravel_04 -32 32 0 1 1
+( 192 736 176 ) ( -752 736 160 ) ( -752 736 176 ) Ground/Materials/gravel_04 0 32 0 1 1
+( 192 1360 160 ) ( -752 720 160 ) ( 192 720 160 ) Ground/Materials/gravel_04 0 32 0 1 1
+( 192 1360 176 ) ( -752 720 176 ) ( -752 1360 176 ) Ground/Materials/gravel_04 0 32 0 1 1
+( 192 816 176 ) ( -752 816 160 ) ( 192 816 160 ) Ground/Materials/gravel_04 0 32 0 1 1
+( 784 1360 176 ) ( 784 720 160 ) ( 784 720 176 ) Ground/Materials/gravel_04 -32 32 0 1 1
 }
 // brush 46
 {
 ( 144 816 96 ) ( 144 1456 80 ) ( 144 1456 96 ) Ground/Materials/gravel_04 0 16 0 1 1
 ( 192 816 96 ) ( -752 816 80 ) ( -752 816 96 ) Ground/Materials/gravel_04 0 16 0 1 1
 ( 192 1456 16 ) ( -752 816 16 ) ( 192 816 16 ) Ground/Materials/gravel_04 0 0 0 1 1
-( 192 1456 192 ) ( -752 816 192 ) ( -752 1456 192 ) Ground/Materials/gravel_04 0 0 0 1 1
+( 192 1456 176 ) ( -752 816 176 ) ( -752 1456 176 ) Ground/Materials/gravel_04 0 0 0 1 1
 ( 192 832 96 ) ( -752 832 80 ) ( 192 832 80 ) Ground/Materials/gravel_04 0 16 0 1 1
 ( 784 1456 96 ) ( 784 816 80 ) ( 784 816 96 ) Ground/Materials/gravel_04 0 16 0 1 1
 }

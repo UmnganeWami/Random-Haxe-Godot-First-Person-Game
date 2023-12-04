@@ -11,16 +11,20 @@ import godot.StringName;
 import godot.InputEvent;
 import godot.Area3D;
 
+import sys.FileSystem;
+
+using com.wami.MacroHelper;
 class InteractArea extends Area3D{
     var collidingBodies:Array<Dynamic> = [];
     var grabbed_body:RigidBody3D = null;
     var colShape:CollisionShape3D = null;
     var holdPlace:Node3D = null;
     var forceTimes:Float = 0.25;
+    var testNode:Node3D = null;
     override function _ready(){
-        colShape = cast get_node("CollisionShape3D");
-        holdPlace = cast get_node("HoldPlacement");
-
+        colShape = "CollisionShape3D".getNode(CollisionShape3D);
+        holdPlace = "HoldPlacement".getNode(Node3D);
+        
         connect("body_entered", cast _on_body_entered);
         connect("body_exited", cast _on_body_exited);
     }

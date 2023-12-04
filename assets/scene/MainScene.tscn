@@ -502,10 +502,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.65441, 0.915545, 3.57645)
 light_energy = 0.66
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.72686, 2.49541, 2.93159)
-text = "THIS ONE WORKS BEST"
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.72686, 3.52486, 2.93159)
+text = "THIS ONE WORKS BEST
+|
+V"
+font_size = 64
+outline_size = 27
 
 [node name="Label3D2" type="Label3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 11.1837, 2.49541, 2.67233)
+transform = Transform3D(-3.65759, 0, -8.74228e-08, 0, 3.39524, 0, 3.19757e-07, 0, -1, 10.1837, 5.75974, 2.67233)
 text = "will literally never be used bcus i hate crouching! 
 hai asset dumper :3"
+font_size = 48

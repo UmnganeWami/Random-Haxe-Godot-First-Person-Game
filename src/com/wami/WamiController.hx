@@ -20,6 +20,7 @@ import godot.Input;
 import godot.InputEventMouseMotion;
 import godot.RigidBody3D;
 
+using com.wami.MacroHelper;
 class WamiController extends CharacterBody3D{
     var targetVelocity:Vector3 = new Vector3();
     var onFloor = false;
@@ -39,19 +40,19 @@ class WamiController extends CharacterBody3D{
     var isCrouching:Bool = false;
 
     override function _ready(){
-        camera_3d = cast get_node("Camera3D");
-        //camera_3d.projection
-        stepSnd = cast get_node("FootStep");
-        jumpSnd = cast get_node("Jump");
+        camera_3d = "Camera3D".getNode(Camera3D);
 
-        selfCollider = cast get_node("Collider");
-        beanObject = cast get_node("Collider/Mesh");
+        stepSnd = "FootStep".getNode(AudioStreamPlayer);
+        jumpSnd = "Jump".getNode(AudioStreamPlayer);
 
-        selfOrigonalSize = this.scale;
+        selfCollider = "Collider".getNode(CollisionShape3D);
+        beanObject = "Collider/Mesh".getNode(MeshInstance3D);
 
-        trace("i hope this is correct");
-        trace(limitVel(50, 10), "should be 10.");
-        trace(limitVel(-50, 10), "should be -10.");
+        selfOrigonalSize = this.scale; 
+
+        //trace("i hope this is correct");
+        //trace(limitVel(50, 10), "should be 10.");
+        //trace(limitVel(-50, 10), "should be -10.");
         Input.set_mouse_mode(MOUSE_MODE_CAPTURED);
     }
 

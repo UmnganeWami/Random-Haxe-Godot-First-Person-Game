@@ -9,6 +9,7 @@ import godot.Node;
 import godot.PackedScene_GenEditState;
 import godot.Node_ProcessMode;
 
+using com.wami.MacroHelper;
 class PausePlayNode extends Control{
     var pause_menu:Control;
 
