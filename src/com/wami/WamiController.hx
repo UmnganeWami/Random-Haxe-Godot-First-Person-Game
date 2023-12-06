@@ -3,18 +3,11 @@ package com.wami;
 import godot.MeshInstance3D;
 import godot.Tween;
 import godot.CollisionShape3D;
-import godot.RigidBody2D;
-import godot.PhysicsRayQueryParameters3D;
-import godot.MouseButton;
 import godot.AudioStreamPlayer;
-import godot.Basis;
 import godot.InputEvent;
-import godot.InputEventMouseButton;
 import godot.Godot;
-import godot.NodePath;
 import godot.Camera3D;
 import godot.Vector3;
-import godot.StringName;
 import godot.CharacterBody3D;
 import godot.Input;
 import godot.InputEventMouseMotion;
@@ -33,11 +26,12 @@ class WamiController extends CharacterBody3D{
     var camera_3d:Camera3D;
     var stepSnd:AudioStreamPlayer;
     var jumpSnd:AudioStreamPlayer;
-    var selfOrigonalSize:Vector3;
     var sinTimer:Float = 0.0;
     var selfCollider:CollisionShape3D;
     var beanObject:MeshInstance3D;
     var isCrouching:Bool = false;
+    final crouchHeight:Float = 1.25;
+    final nonCrouchHeight:Float = 1.75;
 
     override function _ready(){
         camera_3d = "Camera3D".getNode(Camera3D);
@@ -48,12 +42,10 @@ class WamiController extends CharacterBody3D{
         selfCollider = "Collider".getNode(CollisionShape3D);
         beanObject = "Collider/Mesh".getNode(MeshInstance3D);
 
-        selfOrigonalSize = this.scale; 
-
-        //trace("i hope this is correct");
-        //trace(limitVel(50, 10), "should be 10.");
-        //trace(limitVel(-50, 10), "should be -10.");
         Input.set_mouse_mode(MOUSE_MODE_CAPTURED);
+
+        var t:Tween = create_tween();
+        t.tween_property(selfCollider.shape, "height", nonCrouchHeight, 0.2);
     }
 
     override function _input(event:InputEvent){
@@ -69,6 +61,10 @@ class WamiController extends CharacterBody3D{
         return Math.min(Math.max(toLimit, -limitTo), limitTo);
     }
 
+    function isActuallyMoving(vel:Float):Bool{
+        return (vel > 0.05 || vel < -0.05);
+    }
+
     function changeVel(curVel:Float, isBackwards:Bool):Float{
         if(!onFloor){
             return curVel + (isBackwards ? -0.05 : 0.05);
@@ -79,9 +75,6 @@ class WamiController extends CharacterBody3D{
     function isMovable(thing:Dynamic){
         return (thing is RigidBody3D);
     }
-
-    var crouchHeight:Float = 1.5;
-    var nonCrouchHeight:Float = 2;
 
 
     override function _physics_process(delta:Float) {
@@ -107,22 +100,26 @@ class WamiController extends CharacterBody3D{
         if(isRight && !isLeft){
             targetVelocity.x = changeVel(targetVelocity.x, false);
         }
-        if(isJump && this.onFloor){
+        if(isJump && this.onFloor && !isCrouching){
             jumpSnd.play();
             velocity.y = JUMP_VELOCITY;
         }
-        var shouldKeepLerping:Bool = false;
+
         if(!this.onFloor){
             var downMotion = StaticProjectVars.Gravity * delta;
             velocity.y -= downMotion;
             footStepTimer = 0;
-        }else if((isBackward || isForward || isLeft || isRight) && !(isForward && isBackward) && !(isLeft && isRight)){
+        }else if((isBackward || isForward || isLeft || isRight) && !(isForward && isBackward) && !(isLeft && isRight) && (isActuallyMoving(velocity.x) || isActuallyMoving(velocity.z))){
             footStepTimer -= (0.1 / (isCrouching ? 2 : 1));
+            this.rotation.z = Godot.lerp(this.rotation.z, -targetVelocity.x * 0.025, 10.0 * delta);
+            this.rotation.x = Godot.lerp(this.rotation.x, targetVelocity.z * 0.025, 10.0 * delta);
             if(footStepTimer<=0){
                 footStepTimer = maxFootStepTimerTillTickOver;
                 stepSnd.play();
             }
         }else{
+            this.rotation.z = Godot.lerp(this.rotation.z, -0.0, 10.0 * delta);
+            this.rotation.x = Godot.lerp(this.rotation.x, 0.0, 10.0 * delta);
             footStepTimer = 0;
         }
 
@@ -136,13 +133,12 @@ class WamiController extends CharacterBody3D{
             targetVelocity.x = Godot.lerp(targetVelocity.x, 0.0, 0.25);
         }
 
-        var globalTransform = get_global_transform();
         targetVelocity.x = limitVel(targetVelocity.x, MAX_VELOCITY * 1.50);
         targetVelocity.z = limitVel(targetVelocity.z, MAX_VELOCITY * 1.50);
 
+        var globalTransform = get_global_transform();
+
         var direction:Vector3 = (globalTransform.basis.z * targetVelocity.z) + (globalTransform.basis.x * targetVelocity.x);
-        this.rotation.z = Godot.lerp(this.rotation.z, -targetVelocity.x * 0.025, 10 * delta);
-        this.rotation.x = Godot.lerp(this.rotation.x, targetVelocity.z * 0.025, 10 * delta);
 
         var dirNormal = direction * SPEED / (isCrouching && onFloor ? 2 : 1);
         velocity = new Vector3(dirNormal.x, velocity.y, dirNormal.z);

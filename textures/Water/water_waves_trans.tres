@@ -1,0 +1,40 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://ch47iti10d1r3"]
+
+[ext_resource type="Shader" path="res://assets/shade/Wawa.gdshader" id="1_68q1w"]
+
+[sub_resource type="Gradient" id="Gradient_kulmq"]
+colors = PackedColorArray(0, 0, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_v0yy4"]
+fractal_type = 3
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bb8ov"]
+invert = true
+in_3d_space = true
+seamless = true
+seamless_blend_skirt = 0.166
+color_ramp = SubResource("Gradient_kulmq")
+noise = SubResource("FastNoiseLite_v0yy4")
+
+[sub_resource type="Gradient" id="Gradient_66upa"]
+offsets = PackedFloat32Array(0.00787402, 1)
+colors = PackedColorArray(0, 0, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ya0uw"]
+seed = 35463457
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hgab3"]
+seamless = true
+color_ramp = SubResource("Gradient_66upa")
+noise = SubResource("FastNoiseLite_ya0uw")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_68q1w")
+shader_parameter/water_color = Color(0, 0.3, 0.6, 1)
+shader_parameter/wave_speed = 0.1
+shader_parameter/wave_amplitude = 0.1
+shader_parameter/wave_frequency = 2.0
+shader_parameter/NOISE2D = SubResource("NoiseTexture2D_bb8ov")
+shader_parameter/NOISE2D2 = SubResource("NoiseTexture2D_hgab3")

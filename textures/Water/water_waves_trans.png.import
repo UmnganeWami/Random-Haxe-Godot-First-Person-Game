@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwxqewbsl4r4a"
-path.s3tc="res://.godot/imported/wood_fancy_02.jpg-96be76f7e3ec9a2a9b798124a9460251.s3tc.ctex"
+uid="uid://c26tc7vc7i0gd"
+path.s3tc="res://.godot/imported/water_waves_trans.png-377eee57a03edd38e59d9edc9e602915.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/Wood/Materials/wood_fancy_02.jpg"
-dest_files=["res://.godot/imported/wood_fancy_02.jpg-96be76f7e3ec9a2a9b798124a9460251.s3tc.ctex"]
+source_file="res://textures/Water/water_waves_trans.png"
+dest_files=["res://.godot/imported/water_waves_trans.png-377eee57a03edd38e59d9edc9e602915.s3tc.ctex"]
 
 [params]
 
