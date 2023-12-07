@@ -30,6 +30,8 @@ class WamiController extends CharacterBody3D{
     var selfCollider:CollisionShape3D;
     var beanObject:MeshInstance3D;
     var isCrouching:Bool = false;
+    var isRunning:Bool = false;
+    var canRun:Bool = true;
     final crouchHeight:Float = 1.25;
     final nonCrouchHeight:Float = 1.75;
 
@@ -76,7 +78,9 @@ class WamiController extends CharacterBody3D{
         return (thing is RigidBody3D);
     }
 
-
+    final runningSpeed = 1;
+    final walkingSpeed = 1.50;
+    final crouchingSpeed = 2.50;
     override function _physics_process(delta:Float) {
         var isForward = Input.is_action_pressed("move_forward");
         var isBackward = Input.is_action_pressed("move_backward");
@@ -85,6 +89,7 @@ class WamiController extends CharacterBody3D{
         var isJump = Input.is_action_just_pressed("move_jump");
         var isCrouch = Input.is_action_just_pressed("move_crouch");
         var isUnCrouch = Input.is_action_just_released("move_crouch");
+        var isRun = Input.is_action_pressed("move_run");
 
         this.onFloor = this.is_on_floor();
 
@@ -110,9 +115,9 @@ class WamiController extends CharacterBody3D{
             velocity.y -= downMotion;
             footStepTimer = 0;
         }else if((isBackward || isForward || isLeft || isRight) && !(isForward && isBackward) && !(isLeft && isRight) && (isActuallyMoving(velocity.x) || isActuallyMoving(velocity.z))){
-            footStepTimer -= (0.1 / (isCrouching ? 2 : 1));
-            this.rotation.z = Godot.lerp(this.rotation.z, -targetVelocity.x * 0.025, 10.0 * delta);
-            this.rotation.x = Godot.lerp(this.rotation.x, targetVelocity.z * 0.025, 10.0 * delta);
+            footStepTimer -= (0.1 / (isRunning ? runningSpeed : (isCrouching ? crouchingSpeed : walkingSpeed)));
+            this.rotation.z = Godot.lerp(this.rotation.z, -targetVelocity.x * (isRunning ? 0.050 : (isCrouching ? 0.005 : 0.025)), 10.0 * delta);
+            this.rotation.x = Godot.lerp(this.rotation.x, targetVelocity.z * (isRunning ? 0.050 : (isCrouching ? 0.005 : 0.025)), 10.0 * delta);
             if(footStepTimer<=0){
                 footStepTimer = maxFootStepTimerTillTickOver;
                 stepSnd.play();
@@ -140,16 +145,24 @@ class WamiController extends CharacterBody3D{
 
         var direction:Vector3 = (globalTransform.basis.z * targetVelocity.z) + (globalTransform.basis.x * targetVelocity.x);
 
-        var dirNormal = direction * SPEED / (isCrouching && onFloor ? 2 : 1);
+        var dirNormal = direction * SPEED / (isRunning ? runningSpeed : (isCrouching && onFloor ? crouchingSpeed : walkingSpeed));
         velocity = new Vector3(dirNormal.x, velocity.y, dirNormal.z);
 
 
         if(isCrouch){
+            canRun = false;
             var t:Tween = create_tween();
             t.tween_property(selfCollider.shape, "height", crouchHeight, 0.2);
         }else if(isUnCrouch){
+            canRun = true;
             var t:Tween = create_tween();
             t.tween_property(selfCollider.shape, "height", nonCrouchHeight, 0.2);
+        }
+
+        if(isRun && canRun){
+            this.isRunning = true;
+        }else{
+            this.isRunning = false;
         }
 
         if(!isCrouching){

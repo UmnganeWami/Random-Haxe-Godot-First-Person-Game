@@ -18,7 +18,6 @@ color_ramp = SubResource("Gradient_kulmq")
 noise = SubResource("FastNoiseLite_v0yy4")
 
 [sub_resource type="Gradient" id="Gradient_66upa"]
-offsets = PackedFloat32Array(0.00787402, 1)
 colors = PackedColorArray(0, 0, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ya0uw"]
@@ -32,7 +31,7 @@ noise = SubResource("FastNoiseLite_ya0uw")
 [resource]
 render_priority = 0
 shader = ExtResource("1_68q1w")
-shader_parameter/water_color = Color(0, 0.3, 0.6, 1)
+shader_parameter/water_color = Color(0.155834, 0.249194, 0.393888, 1)
 shader_parameter/wave_speed = 0.1
 shader_parameter/wave_amplitude = 0.1
 shader_parameter/wave_frequency = 2.0

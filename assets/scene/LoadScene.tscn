@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3le1td1spdfj"]
+
+[ext_resource type="Texture2D" uid="uid://dge4tjc0off5x" path="res://icon.svg" id="1_hbg5p"]
+[ext_resource type="Theme" uid="uid://c2ndbgg2bmacu" path="res://assets/theme/PauseMenuGamePauseText.tres" id="2_tgqy6"]
+[ext_resource type="Script" path="res://out/com_LoadScene.gd" id="3_vtt40"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(583, 321)
+scale = Vector2(10.931, 5.81622)
+texture = ExtResource("1_hbg5p")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = 264.0
+offset_right = 1016.0
+offset_bottom = 64.0
+theme = ExtResource("2_tgqy6")
+text = "GAME IS LOADING... PLEASE WAIT!"
+horizontal_alignment = 1
+
+[node name="LoadScene" type="Node2D" parent="."]
+script = ExtResource("3_vtt40")
