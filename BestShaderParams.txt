@@ -1,2 +1,4 @@
-scale: 0.521
-jitter scale: 0.454
+resolution_scale: 0.521
+jitter_intensity: 0.454
+jitter_interval: 35.987
+color_limit_amount: 21.058

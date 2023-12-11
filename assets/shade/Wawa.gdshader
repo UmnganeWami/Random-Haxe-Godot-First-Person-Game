@@ -21,17 +21,18 @@ uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_n
 void fragment() {
     // Use the water color for the albedo
 	//float sinTime = sin(TIME);
-	float meowTime = TIME*0.080;
+	float meowTime = TIME*0.35;
+	float meowSinTime = sin(meowTime);
 	vec2 realUV = UV/8.0;
-	vec2 UV1 = realUV + vec2((meowTime/20.0), (meowTime/20.0)+1.5);
-	vec2 UVtw = realUV + vec2((meowTime/20.0)+2.5, -((meowTime/20.0)+3.5));
-	vec2 UV3 = realUV + vec2(-((meowTime/20.0)+4.5), (meowTime/20.0)+5.5);
+	vec2 UV1 = realUV + vec2((meowTime/20.0), ((meowTime + meowSinTime)/20.0)+1.5);
+	vec2 UVtw = realUV + vec2(((meowTime + meowSinTime)/20.0)+2.5, -((meowTime/20.0)+3.5));
+	vec2 UV3 = realUV + vec2(-(((meowTime + meowSinTime)/20.0)+4.5), ((meowTime + meowSinTime)/20.0)+5.5);
 	vec2 UV4 = realUV + vec2(-((meowTime/20.0)+6.5), -((meowTime/20.0)));
 	vec3 NOISECOMBPT1 = texture(NOISE2D, UV1).rgb + texture(NOISE2D2, UVtw).rgb;
 	vec3 NOISECOMBPT2 = texture(NOISE2D2, UV3).rgb + texture(NOISE2D, UV4).rgb;
 	
 	vec3 NOISECOMB = NOISECOMBPT1 + NOISECOMBPT2;
-	vec3 color = mix(vec3(0.0, 0.3, 0.6), vec3(0.0, 0.5, 1.0), NOISECOMB);
+	//vec3 color = mix(vec3(0.0, 0.3, 0.6), vec3(0.0, 0.5, 1.0), NOISECOMB);
 	ALBEDO = water_color.rgb + NOISECOMB; //+ textureLod(screen_texture, SCREEN_UV, 0.0).rgb;
 	ALPHA = 0.25;
     

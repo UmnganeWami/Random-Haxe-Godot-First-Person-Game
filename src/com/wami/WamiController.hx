@@ -19,10 +19,10 @@ class WamiController extends CharacterBody3D{
     var onFloor = false;
     final maxFootStepTimerTillTickOver:Float = 1.0;
     var footStepTimer:Float = 0.0;
-    final MOUSE_SENSITIVITY:Float = 0.075;
-    final JUMP_VELOCITY = 4.5;
-    final SPEED = 2.0;
-    final MAX_VELOCITY = 3.0;
+    var MOUSE_SENSITIVITY:Float = 0.075;
+    var JUMP_VELOCITY = 4.5;
+    var SPEED = 2.0;
+    var MAX_VELOCITY = 3.0;
     var camera_3d:Camera3D;
     var stepSnd:AudioStreamPlayer;
     var jumpSnd:AudioStreamPlayer;
@@ -32,7 +32,7 @@ class WamiController extends CharacterBody3D{
     var isCrouching:Bool = false;
     var isRunning:Bool = false;
     var canRun:Bool = true;
-    final crouchHeight:Float = 1.25;
+    final crouchHeight:Float = 1.25; 
     final nonCrouchHeight:Float = 1.75;
 
     override function _ready(){
@@ -64,23 +64,33 @@ class WamiController extends CharacterBody3D{
     }
 
     function isActuallyMoving(vel:Float):Bool{
-        return (vel > 0.05 || vel < -0.05);
+        var movingCap = 0.1;
+        return (vel > movingCap || vel < -movingCap);
     }
 
     function changeVel(curVel:Float, isBackwards:Bool):Float{
         if(!onFloor){
             return curVel + (isBackwards ? -0.05 : 0.05);
         }
-        return (isBackwards ? -MAX_VELOCITY : MAX_VELOCITY);
+        var realMaxVel = MAX_VELOCITY / getRealSpeed();
+        return (isBackwards ? -realMaxVel : realMaxVel);
     }
 
     function isMovable(thing:Dynamic){
         return (thing is RigidBody3D);
     }
 
-    final runningSpeed = 1;
-    final walkingSpeed = 1.50;
-    final crouchingSpeed = 2.50;
+    function getRealSpeed():Float{
+        return (isRunning ? runningSpeed : (isCrouching && onFloor ? crouchingSpeed : walkingSpeed));
+    }
+
+    function getTiltByAmt(){
+        return (isRunning ? 0.050 : (isCrouching ? 0.005 : 0.025));
+    }
+
+    var runningSpeed = 1;
+    var walkingSpeed = 1.50;
+    var crouchingSpeed = 2.75;
     override function _physics_process(delta:Float) {
         var isForward = Input.is_action_pressed("move_forward");
         var isBackward = Input.is_action_pressed("move_backward");
@@ -115,9 +125,9 @@ class WamiController extends CharacterBody3D{
             velocity.y -= downMotion;
             footStepTimer = 0;
         }else if((isBackward || isForward || isLeft || isRight) && !(isForward && isBackward) && !(isLeft && isRight) && (isActuallyMoving(velocity.x) || isActuallyMoving(velocity.z))){
-            footStepTimer -= (0.1 / (isRunning ? runningSpeed : (isCrouching ? crouchingSpeed : walkingSpeed)));
-            this.rotation.z = Godot.lerp(this.rotation.z, -targetVelocity.x * (isRunning ? 0.050 : (isCrouching ? 0.005 : 0.025)), 10.0 * delta);
-            this.rotation.x = Godot.lerp(this.rotation.x, targetVelocity.z * (isRunning ? 0.050 : (isCrouching ? 0.005 : 0.025)), 10.0 * delta);
+            footStepTimer -= (0.1 / getRealSpeed());
+            this.rotation.z = Godot.lerp(this.rotation.z, -targetVelocity.x * (getTiltByAmt()), 10.0 * delta);
+            this.rotation.x = Godot.lerp(this.rotation.x, (targetVelocity.z * (getTiltByAmt() * 1.50)), 10.0 * delta);
             if(footStepTimer<=0){
                 footStepTimer = maxFootStepTimerTillTickOver;
                 stepSnd.play();
@@ -145,8 +155,8 @@ class WamiController extends CharacterBody3D{
 
         var direction:Vector3 = (globalTransform.basis.z * targetVelocity.z) + (globalTransform.basis.x * targetVelocity.x);
 
-        var dirNormal = direction * SPEED / (isRunning ? runningSpeed : (isCrouching && onFloor ? crouchingSpeed : walkingSpeed));
-        velocity = new Vector3(dirNormal.x, velocity.y, dirNormal.z);
+        var dirNormal = direction * SPEED; // / getRealSpeed();
+        velocity = new Vector3(Godot.lerp(velocity.x, dirNormal.x, 0.25), velocity.y, Godot.lerp(velocity.z, dirNormal.z, 0.25));
 
 
         if(isCrouch){

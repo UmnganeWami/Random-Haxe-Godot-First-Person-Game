@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="QodotFGDFile" load_steps=3 format=3 uid="uid://dt31be217jv0h"]
+
+[ext_resource type="Script" path="res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_file.gd" id="1_1qiub"]
+[ext_resource type="Resource" uid="uid://dq4qc1okloten" path="res://assets/entity/PLR.tres" id="1_mptte"]
+
+[resource]
+script = ExtResource("1_1qiub")
+export_file = false
+target_folder = "C:/Users/altac/Documents/Half Life is cool/assets/entity"
+fgd_name = "WamiEntities"
+base_fgd_files = Array[Resource]([])
+entity_definitions = Array[Resource]([ExtResource("1_mptte")])

@@ -1,4 +1,4 @@
-package com.wami;
+package com.wami.old;
 
 import godot.Node3D;
 import godot.Basis;

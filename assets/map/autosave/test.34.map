@@ -4,7 +4,7 @@
 {
 "classname" "worldspawn"
 "_tb_def" "external:C:/Users/altac/Documents/QuakeMapper/games/Qodot/Quake.fgd"
-"_tb_textures" "textures;textures/Concrete/Materials;textures/Ground/Materials;textures/Misc/Materials;textures/Nature/Materials;textures/Products/Materials;textures/Rocks/Materials;textures/Tiles/Materials;textures/Walls/Materials;textures/Water;textures/Wood/Materials;textures/special"
+"_tb_textures" "textures;textures/Concrete/Materials;textures/Ground/Materials;textures/Misc/Materials;textures/Nature/Materials;textures/Products/Materials;textures/Tiles/Materials;textures/Walls/Materials;textures/Water;textures/Wood/Materials;textures/special"
 // brush 0
 {
 ( -864 -64 -16 ) ( -864 -63 -16 ) ( -864 -64 -15 ) special/skip 0 0 0 1 1
@@ -430,12 +430,12 @@
 }
 // brush 47
 {
-( -736 -880 112 ) ( -736 -688 80 ) ( -736 -688 112 ) Nature/Materials/bark_2 -16 16 0 1 1
-( -672 -880 112 ) ( -880 -880 80 ) ( -880 -880 112 ) Nature/Materials/bark_2 -16 16 0 1 1
+( -736 -880 112 ) ( -736 -688 80 ) ( -736 -688 112 ) Nature/Materials/bark -16 16 0 1 1
+( -672 -880 112 ) ( -880 -880 80 ) ( -880 -880 112 ) Nature/Materials/bark -16 16 0 1 1
 ( -672 -688 16 ) ( -880 -880 16 ) ( -672 -880 16 ) special/skip -16 16 0 1 1
 ( -672 -688 128 ) ( -880 -880 128 ) ( -880 -688 128 ) special/skip -16 16 0 1 1
-( -672 -848 112 ) ( -880 -848 80 ) ( -672 -848 80 ) Nature/Materials/bark_2 -16 16 0 1 1
-( -704 -688 112 ) ( -704 -880 80 ) ( -704 -880 112 ) Nature/Materials/bark_2 -16 16 0 1 1
+( -672 -848 112 ) ( -880 -848 80 ) ( -672 -848 80 ) Nature/Materials/bark -16 16 0 1 1
+( -704 -688 112 ) ( -704 -880 80 ) ( -704 -880 112 ) Nature/Materials/bark -16 16 0 1 1
 }
 // brush 48
 {
@@ -488,8 +488,8 @@
 ( -800 -976 272 ) ( -816 -960 272 ) ( -816 -960 400 ) Ground/Materials/grass_03 32 32 0 1 1
 ( -832 -784 272 ) ( -800 -752 272 ) ( -800 -752 400 ) Ground/Materials/grass_03 32 32 0 1 1
 ( -576 -976 192 ) ( -784 -976 160 ) ( -784 -976 192 ) Ground/Materials/grass_03 -48 32 0 1 1
-( -576 -736 176 ) ( -784 -928 176 ) ( -576 -928 176 ) special/skip -48 -32 0 1 1
-( -576 -736 256 ) ( -784 -928 256 ) ( -784 -736 256 ) special/skip -48 -32 0 1 1
+( -576 -736 176 ) ( -784 -928 176 ) ( -576 -928 176 ) Ground/Materials/grass_03 -48 -32 0 1 1
+( -576 -736 256 ) ( -784 -928 256 ) ( -784 -736 256 ) Ground/Materials/grass_03 -48 -32 0 1 1
 ( -576 -752 192 ) ( -784 -752 160 ) ( -576 -752 160 ) Ground/Materials/grass_03 -48 32 0 1 1
 ( -608 -944 272 ) ( -640 -976 272 ) ( -640 -976 400 ) Ground/Materials/grass_03 -48 32 0 1 1
 ( -640 -752 272 ) ( -608 -784 272 ) ( -608 -784 400 ) Ground/Materials/grass_03 -48 32 0 1 1
@@ -512,7 +512,7 @@
 ( -832 -784 272 ) ( -800 -752 272 ) ( -800 -752 400 ) Ground/Materials/grass_03 -16 -32 0 1 1
 ( -624 -976 272 ) ( -736 -976 240 ) ( -736 -976 272 ) Ground/Materials/grass_03 -32 -32 0 1 1
 ( -608 -976 272 ) ( -608 -944 304 ) ( -480 -944 304 ) Ground/Materials/grass_03 -32 0 0 1 1
-( -624 -768 256 ) ( -736 -848 256 ) ( -624 -848 256 ) special/skip -32 16 0 1 1
+( -624 -768 256 ) ( -736 -848 256 ) ( -624 -848 256 ) Ground/Materials/grass_03 -32 16 0 1 1
 ( -624 -768 304 ) ( -736 -848 304 ) ( -736 -768 304 ) Ground/Materials/grass_03 -32 16 0 1 1
 ( -640 -784 304 ) ( -832 -784 304 ) ( -832 -752 272 ) Ground/Materials/grass_03 -32 16 0 1 1
 ( -624 -752 272 ) ( -736 -752 240 ) ( -624 -752 240 ) Ground/Materials/grass_03 -32 -32 0 1 1
@@ -530,7 +530,7 @@
 ( -816 -976 160 ) ( -704 -976 192 ) ( -704 -976 160 ) Ground/Materials/grass_03 0 -16 180 1 1
 ( -832 -976 160 ) ( -832 -944 128 ) ( -960 -944 128 ) Ground/Materials/grass_03 0 0 180 1 -1
 ( -816 -768 128 ) ( -704 -848 128 ) ( -704 -768 128 ) Ground/Materials/grass_03 0 16 180 1 -1
-( -816 -768 176 ) ( -704 -848 176 ) ( -816 -848 176 ) special/skip 0 16 180 1 -1
+( -816 -768 176 ) ( -704 -848 176 ) ( -816 -848 176 ) Ground/Materials/grass_03 0 16 180 1 -1
 ( -800 -784 128 ) ( -608 -784 128 ) ( -608 -752 160 ) Ground/Materials/grass_03 0 16 180 1 -1
 ( -816 -752 160 ) ( -704 -752 192 ) ( -816 -752 192 ) Ground/Materials/grass_03 0 -16 180 1 1
 ( -640 -976 160 ) ( -608 -944 160 ) ( -608 -944 32 ) Ground/Materials/grass_03 -16 -16 0 1 -1
@@ -540,12 +540,12 @@
 }
 // brush 57
 {
-( -736 -880 16 ) ( -752 -896 0 ) ( -752 -832 0 ) Nature/Materials/bark_2 6 17 90 1 -1
-( -704 -880 16 ) ( -688 -896 0 ) ( -752 -896 0 ) Nature/Materials/bark_2 0 0 0 1 1
-( -688 -896 0 ) ( -688 -832 0 ) ( -752 -832 0 ) special/skip -40 -16 0 2 2
-( -736 -848 16 ) ( -704 -848 16 ) ( -704 -880 16 ) special/skip 0 0 0 1 1
-( -752 -832 0 ) ( -688 -832 0 ) ( -704 -848 16 ) Nature/Materials/bark_2 0 0 0 1 -1
-( -704 -848 16 ) ( -688 -832 0 ) ( -688 -896 0 ) Nature/Materials/bark_2 0 -16 90 1 1
+( -736 -880 16 ) ( -752 -896 0 ) ( -752 -832 0 ) Concrete/Materials/concrete_pipe_01 0 -48 90 1 -1
+( -704 -880 16 ) ( -688 -896 0 ) ( -752 -896 0 ) Concrete/Materials/concrete_pipe_01 0 0 0 1 1
+( -688 -896 0 ) ( -688 -832 0 ) ( -752 -832 0 ) Concrete/Materials/concrete_pipe_01 -40 48.000015 0 2 2
+( -736 -848 16 ) ( -704 -848 16 ) ( -704 -880 16 ) Concrete/Materials/concrete_pipe_01 0 0 0 1 1
+( -752 -832 0 ) ( -688 -832 0 ) ( -704 -848 16 ) Concrete/Materials/concrete_pipe_01 0 0 0 1 -1
+( -704 -848 16 ) ( -688 -832 0 ) ( -688 -896 0 ) Concrete/Materials/concrete_pipe_01 0 48 90 1 1
 }
 }
 // entity 1
