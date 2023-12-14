@@ -8,7 +8,7 @@ class LoadScene extends Node2D{
         var daTree:SceneTree = get_tree();
         switch(StaticProjectVars.ToLoadInto){
             case GAME: 
-                daTree.change_scene_to_file("res://assets/scene/MainScene.tscn");
+                daTree.change_scene_to_file("res://assets/scn/MainScene.tscn");
         }
     }
 }

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="QodotFGDPointClass" load_steps=3 format=3 uid="uid://d10w5cx6xdg0n"]
+
+[ext_resource type="Script" path="res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_point_class.gd" id="1_6d240"]
+[ext_resource type="PackedScene" uid="uid://dbio10tj2dyga" path="res://assets/obj/literallyjustapointlight.tscn" id="1_jlbwv"]
+
+[resource]
+script = ExtResource("1_6d240")
+scene_file = ExtResource("1_jlbwv")
+apply_rotation_on_map_build = true
+classname = "THESUN"
+description = "yk..."
+qodot_internal = false
+base_classes = Array[Resource]([])
+class_properties = {}
+class_property_descriptions = {}
+meta_properties = {
+"color": Color(0.8, 0.8, 0.8, 1),
+"size": AABB(-8, -8, -8, 8, 8, 8)
+}
+node_class = ""
+transient_node = false

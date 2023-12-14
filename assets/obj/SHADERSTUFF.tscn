@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmogldgjiwdb1"]
+
+[ext_resource type="Shader" path="res://assets/shd/Mrow.gdshader" id="1_5of03"]
+[ext_resource type="Texture2D" uid="uid://cfek3mqb52ndb" path="res://assets/img/reticle.png" id="2_mtl3u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o77fw"]
+shader = ExtResource("1_5of03")
+shader_parameter/resolution_scale = 0.38
+shader_parameter/jitter_intensity = 0.1
+shader_parameter/jitter_interval = 35.987
+shader_parameter/enable_random_jitter = true
+shader_parameter/color_limit_amount = 21.058
+shader_parameter/enable_color_limit = true
+shader_parameter/enable_random_pixel_offsetting = false
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_o77fw")
+use_parent_material = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CROSS" type="TextureRect" parent="."]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -7.5
+offset_right = 7.5
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_mtl3u")

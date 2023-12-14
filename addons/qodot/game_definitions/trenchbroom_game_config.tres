@@ -10,13 +10,13 @@
 [ext_resource type="Resource" uid="uid://dtrwmwppklvpw" path="res://addons/qodot/game_definitions/fgd/essentials_fgd.tres" id="5_lvbhp"]
 [ext_resource type="Resource" uid="uid://c6c7ca1bms133" path="res://addons/qodot/game_definitions/fgd/demo_entities_fgd.tres" id="6_6fyp8"]
 [ext_resource type="Resource" uid="uid://bkmh5qlqkolvt" path="res://addons/qodot/game_definitions/fgd/reciever_signal_fgd.tres" id="6_8ndd7"]
-[ext_resource type="Resource" uid="uid://dt31be217jv0h" path="res://assets/entity/ENTITIES.tres" id="9_uc6os"]
+[ext_resource type="Resource" uid="uid://dt31be217jv0h" path="res://assets/ent/ENTITIES.tres" id="9_uc6os"]
 
 [resource]
 script = ExtResource("3_8vw40")
 export_file = false
 trenchbroom_games_folder = "C:/Users/altac/Documents/QuakeMapper/games"
-game_name = "Qodot"
+game_name = "WamiGame"
 icon = ExtResource("2_jej4n")
 map_formats = Array[Dictionary]([{
 "format": "Valve",

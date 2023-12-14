@@ -1,0 +1,2 @@
+@PointClass color(204 204 204) size(-8 -8 -8, 8 8 8) = entity_plr : "the player" [
+]

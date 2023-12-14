@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://dbio10tj2dyga"]
+
+[node name="Literallyjustapointlight" type="DirectionalLight3D"]

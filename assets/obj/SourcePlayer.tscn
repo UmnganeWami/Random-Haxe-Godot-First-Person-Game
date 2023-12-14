@@ -1,0 +1,66 @@
+[gd_scene load_steps=12 format=3 uid="uid://dg6cepj5rwf2d"]
+
+[ext_resource type="Script" path="res://out/com_SourceController.gd" id="1_6vhds"]
+[ext_resource type="Script" path="res://out/com_PausePlayNode.gd" id="2_3n0jw"]
+[ext_resource type="Script" path="res://out/com_HoldRayCast.gd" id="3_oi0qb"]
+[ext_resource type="AudioStream" uid="uid://bkvrlco5ktx8i" path="res://assets/snd/step1.wav" id="4_tg1qj"]
+[ext_resource type="AudioStream" uid="uid://ba76ill8y5un6" path="res://assets/snd/step2.wav" id="5_6npje"]
+[ext_resource type="AudioStream" uid="uid://cwet3k34e3njv" path="res://assets/snd/step3.wav" id="6_l4yyx"]
+[ext_resource type="AudioStream" uid="uid://bg83d1vam3m1f" path="res://assets/snd/jump.wav" id="7_xh08j"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ytgug"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_t2kdg"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0cqxg"]
+random_pitch = 1.1
+random_volume_offset_db = 5.0
+streams_count = 3
+stream_0/stream = ExtResource("4_tg1qj")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_6npje")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_l4yyx")
+stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_r3idt"]
+random_pitch = 1.25
+random_volume_offset_db = 5.0
+streams_count = 1
+stream_0/stream = ExtResource("7_xh08j")
+stream_0/weight = 1.0
+
+[node name="SourcePlayer" type="CharacterBody3D"]
+script = ExtResource("1_6vhds")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.553186, 0)
+
+[node name="PausePlayNode" type="Control" parent="Camera3D"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_3n0jw")
+
+[node name="HoldRayCast" type="RayCast3D" parent="Camera3D"]
+target_position = Vector3(0, 0, -5)
+collision_mask = 2
+script = ExtResource("3_oi0qb")
+
+[node name="Hand" type="Marker3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.41543)
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_ytgug")
+
+[node name="Mesh" type="MeshInstance3D" parent="Collider"]
+mesh = SubResource("CapsuleMesh_t2kdg")
+
+[node name="FootStep" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_0cqxg")
+volume_db = -14.214
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_r3idt")
+volume_db = -21.517

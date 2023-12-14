@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="QodotFGDFile" load_steps=4 format=3 uid="uid://dt31be217jv0h"]
+
+[ext_resource type="Script" path="res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_file.gd" id="1_1qiub"]
+[ext_resource type="Resource" uid="uid://dq4qc1okloten" path="res://assets/ent/PLR.tres" id="1_mptte"]
+[ext_resource type="Resource" uid="uid://d10w5cx6xdg0n" path="res://assets/ent/THE_SUN.tres" id="2_wnr62"]
+
+[resource]
+script = ExtResource("1_1qiub")
+export_file = false
+target_folder = "C:/Users/altac/Documents/QuakeMapper/games/Qodot"
+fgd_name = "WamiEntities"
+base_fgd_files = Array[Resource]([])
+entity_definitions = Array[Resource]([ExtResource("1_mptte"), ExtResource("2_wnr62")])

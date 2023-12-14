@@ -15,47 +15,48 @@ import godot.RigidBody3D;
 
 using com.wami.MacroHelper;
 class WamiController extends CharacterBody3D{
-    var targetVelocity:Vector3 = new Vector3();
-    var onFloor = false;
-    final maxFootStepTimerTillTickOver:Float = 1.0;
-    var footStepTimer:Float = 0.0;
-    var MOUSE_SENSITIVITY:Float = 0.075;
-    var JUMP_VELOCITY = 4.5;
-    var SPEED = 2.0;
-    var MAX_VELOCITY = 3.0;
-    var camera_3d:Camera3D;
-    var stepSnd:AudioStreamPlayer;
-    var jumpSnd:AudioStreamPlayer;
-    var sinTimer:Float = 0.0;
-    var selfCollider:CollisionShape3D;
-    var beanObject:MeshInstance3D;
-    var isCrouching:Bool = false;
-    var isRunning:Bool = false;
-    var canRun:Bool = true;
-    final crouchHeight:Float = 1.25; 
-    final nonCrouchHeight:Float = 1.75;
+    var velocityTarget:Vector3 = new Vector3();
+    var isOnFloor = false;
+    final maxTimeUntilFootStep:Float = 1.0;
+    var footStepTime:Float = 0.0;
+    var mouseSensitivity:Float = 0.075;
+    var jumpSpeed = 4.5;
+    var movementSpeed = 2.0;
+    var maxSpeed = 3.0;
+    var playerFriction:Float = 0.75;
+    var camera3D:Camera3D;
+    var footStepSound:AudioStreamPlayer;
+    var jumpSound:AudioStreamPlayer;
+    var sineFootStepTime:Float = 0.0;
+    var playerCollider:CollisionShape3D;
+    var playerMesh:MeshInstance3D;
+    var crouching:Bool = false;
+    var running:Bool = false;
+    var ableToRun:Bool = true;
+    final crouchingHeight:Float = 1.25; 
+    final standingHeight:Float = 1.75;
 
     override function _ready(){
-        camera_3d = "Camera3D".getNode(Camera3D);
+        camera3D = "Camera3D".getNode(Camera3D);
 
-        stepSnd = "FootStep".getNode(AudioStreamPlayer);
-        jumpSnd = "Jump".getNode(AudioStreamPlayer);
+        footStepSound = "FootStep".getNode(AudioStreamPlayer);
+        jumpSound = "Jump".getNode(AudioStreamPlayer);
 
-        selfCollider = "Collider".getNode(CollisionShape3D);
-        beanObject = "Collider/Mesh".getNode(MeshInstance3D);
+        playerCollider = "Collider".getNode(CollisionShape3D);
+        playerMesh = "Collider/Mesh".getNode(MeshInstance3D);
 
         Input.set_mouse_mode(MOUSE_MODE_CAPTURED);
 
         var t:Tween = create_tween();
-        t.tween_property(selfCollider.shape, "height", nonCrouchHeight, 0.2);
+        t.tween_property(playerCollider.shape, "height", standingHeight, 0.2);
     }
 
     override function _input(event:InputEvent){
-        if(event is InputEventMouseMotion && camera_3d != null){
+        if(event is InputEventMouseMotion && camera3D != null){
             var inpEvent:InputEventMouseMotion = cast event;
-            this.rotate_y(Godot.deg_to_rad(-inpEvent.relative.x * MOUSE_SENSITIVITY));
-            camera_3d.rotate_x(Godot.deg_to_rad(-inpEvent.relative.y * MOUSE_SENSITIVITY) * 1.25);
-            camera_3d.rotation_degrees.x = Godot.clamp(camera_3d.rotation_degrees.x, -70, 70);
+            this.rotate_y(Godot.deg_to_rad(-inpEvent.relative.x * mouseSensitivity));
+            camera3D.rotate_x(Godot.deg_to_rad(-inpEvent.relative.y * mouseSensitivity) * 1.25);
+            camera3D.rotation_degrees.x = Godot.clamp(camera3D.rotation_degrees.x, -70, 70);
         }
     }
 
@@ -64,15 +65,15 @@ class WamiController extends CharacterBody3D{
     }
 
     function isActuallyMoving(vel:Float):Bool{
-        var movingCap = 0.1;
+        var movingCap = 0.05;
         return (vel > movingCap || vel < -movingCap);
     }
 
     function changeVel(curVel:Float, isBackwards:Bool):Float{
-        if(!onFloor){
+        if(!isOnFloor){
             return curVel + (isBackwards ? -0.05 : 0.05);
         }
-        var realMaxVel = MAX_VELOCITY / getRealSpeed();
+        var realMaxVel = maxSpeed / getRealSpeed();
         return (isBackwards ? -realMaxVel : realMaxVel);
     }
 
@@ -81,11 +82,20 @@ class WamiController extends CharacterBody3D{
     }
 
     function getRealSpeed():Float{
-        return (isRunning ? runningSpeed : (isCrouching && onFloor ? crouchingSpeed : walkingSpeed));
+        return (running ? runningSpeed : (crouching && isOnFloor ? crouchingSpeed : walkingSpeed));
     }
 
     function getTiltByAmt(){
-        return (isRunning ? 0.050 : (isCrouching ? 0.005 : 0.025));
+        return (running ? 0.050 : (crouching ? 0.005 : 0.025));
+    }
+
+    function player_friction(velPos:Float){
+        if(velPos > playerFriction){
+            return velPos - playerFriction;
+        }else if(velPos < -playerFriction){
+            return velPos + playerFriction;
+        }
+        return 0;
     }
 
     var runningSpeed = 1;
@@ -101,91 +111,91 @@ class WamiController extends CharacterBody3D{
         var isUnCrouch = Input.is_action_just_released("move_crouch");
         var isRun = Input.is_action_pressed("move_run");
 
-        this.onFloor = this.is_on_floor();
+        isOnFloor = this.is_on_floor();
 
         if(isForward && !isBackward){
-            targetVelocity.z = changeVel(targetVelocity.z, true);
+            velocityTarget.z = changeVel(velocityTarget.z, true);
         }
         if(isBackward && !isForward){
-            targetVelocity.z = changeVel(targetVelocity.z, false);
+            velocityTarget.z = changeVel(velocityTarget.z, false);
         }
         if(isLeft && !isRight){
-            targetVelocity.x = changeVel(targetVelocity.x, true);
+            velocityTarget.x = changeVel(velocityTarget.x, true);
         }
         if(isRight && !isLeft){
-            targetVelocity.x = changeVel(targetVelocity.x, false);
+            velocityTarget.x = changeVel(velocityTarget.x, false);
         }
-        if(isJump && this.onFloor && !isCrouching){
-            jumpSnd.play();
-            velocity.y = JUMP_VELOCITY;
+        if(isJump && isOnFloor && !crouching){
+            jumpSound.play();
+            velocity.y = jumpSpeed;
         }
 
-        if(!this.onFloor){
+        if(!isOnFloor){
             var downMotion = StaticProjectVars.Gravity * delta;
             velocity.y -= downMotion;
-            footStepTimer = 0;
-        }else if((isBackward || isForward || isLeft || isRight) && !(isForward && isBackward) && !(isLeft && isRight) && (isActuallyMoving(velocity.x) || isActuallyMoving(velocity.z))){
-            footStepTimer -= (0.1 / getRealSpeed());
-            this.rotation.z = Godot.lerp(this.rotation.z, -targetVelocity.x * (getTiltByAmt()), 10.0 * delta);
-            this.rotation.x = Godot.lerp(this.rotation.x, (targetVelocity.z * (getTiltByAmt() * 1.50)), 10.0 * delta);
-            if(footStepTimer<=0){
-                footStepTimer = maxFootStepTimerTillTickOver;
-                stepSnd.play();
+            footStepTime = 0;
+        }else if((isBackward || isForward || isLeft || isRight) && (!(isForward && isBackward) || !(isLeft && isRight)) && (isActuallyMoving(velocity.x) || isActuallyMoving(velocity.z))){
+            footStepTime -= (0.1 / getRealSpeed());
+            rotation.z = Godot.lerp(rotation.z, -velocityTarget.x * (getTiltByAmt()), 10.0 * delta);
+            rotation.x = Godot.lerp(rotation.x, (velocityTarget.z * (getTiltByAmt() * 1.50)), 10.0 * delta);
+            if(footStepTime<=0){
+                footStepTime = maxTimeUntilFootStep;
+                footStepSound.play();
             }
         }else{
-            this.rotation.z = Godot.lerp(this.rotation.z, -0.0, 10.0 * delta);
-            this.rotation.x = Godot.lerp(this.rotation.x, 0.0, 10.0 * delta);
-            footStepTimer = 0;
+            rotation.z = Godot.lerp(rotation.z, -0.0, 10.0 * delta);
+            rotation.x = Godot.lerp(rotation.x, 0.0, 10.0 * delta);
+            footStepTime = 0;
         }
 
-        sinTimer = Godot.lerp(sinTimer, maxFootStepTimerTillTickOver - footStepTimer, 0.25);
-        camera_3d.position.y = (((selfCollider:Dynamic).shape.height / 2) * 0.50) + (Math.sin(sinTimer) * 0.35);
+        sineFootStepTime = Godot.lerp(sineFootStepTime, maxTimeUntilFootStep - footStepTime, 0.25);
+        camera3D.position.y = (((playerCollider:Dynamic).shape.height / 2) * 0.50) + (Math.sin(sineFootStepTime) * 0.35);
 
-        if (((isBackward && isForward) || (!isBackward && !isForward)) && onFloor){
-            targetVelocity.z = Godot.lerp(targetVelocity.z, 0.0, 0.25);
+        if (((isBackward && isForward) || (!isBackward && !isForward)) && isOnFloor){
+            velocityTarget.z = Godot.lerp(velocityTarget.z, 0.0, 0.25);
         }
-        if (((isLeft && isRight) || (!isLeft && !isRight)) && onFloor){
-            targetVelocity.x = Godot.lerp(targetVelocity.x, 0.0, 0.25);
+        if (((isLeft && isRight) || (!isLeft && !isRight)) && isOnFloor){
+            velocityTarget.x = Godot.lerp(velocityTarget.x, 0.0, 0.25);
         }
 
-        targetVelocity.x = limitVel(targetVelocity.x, MAX_VELOCITY * 1.50);
-        targetVelocity.z = limitVel(targetVelocity.z, MAX_VELOCITY * 1.50);
+        velocityTarget.x = limitVel(velocityTarget.x, maxSpeed * 1.50);
+        velocityTarget.z = limitVel(velocityTarget.z, maxSpeed * 1.50);
 
         var globalTransform = get_global_transform();
 
-        var direction:Vector3 = (globalTransform.basis.z * targetVelocity.z) + (globalTransform.basis.x * targetVelocity.x);
+        var direction:Vector3 = (globalTransform.basis.z * velocityTarget.z) + (globalTransform.basis.x * velocityTarget.x);
 
-        var dirNormal = direction * SPEED; // / getRealSpeed();
+        var dirNormal = direction * movementSpeed;
         velocity = new Vector3(Godot.lerp(velocity.x, dirNormal.x, 0.25), velocity.y, Godot.lerp(velocity.z, dirNormal.z, 0.25));
 
 
         if(isCrouch){
-            canRun = false;
+            ableToRun = false;
             var t:Tween = create_tween();
-            t.tween_property(selfCollider.shape, "height", crouchHeight, 0.2);
+            t.tween_property(playerCollider.shape, "height", crouchingHeight, 0.2);
         }else if(isUnCrouch){
-            canRun = true;
+            ableToRun = true;
             var t:Tween = create_tween();
-            t.tween_property(selfCollider.shape, "height", nonCrouchHeight, 0.2);
+            t.tween_property(playerCollider.shape, "height", standingHeight, 0.2);
         }
 
-        if(isRun && canRun){
-            this.isRunning = true;
+        if(isRun && ableToRun){
+            running = true;
         }else{
-            this.isRunning = false;
+            running = false;
         }
 
-        if(!isCrouching){
-            if((selfCollider:Dynamic).shape.height == crouchHeight){
-                isCrouching = true;
+        if(!crouching){
+            if((playerCollider:Dynamic).shape.height == crouchingHeight){
+                crouching = true;
             }
         }else{
-            if((selfCollider:Dynamic).shape.height == nonCrouchHeight){
-                isCrouching = false;
+            if((playerCollider:Dynamic).shape.height == standingHeight){
+                crouching = false;
             }
         }
 
-        (beanObject:Dynamic).mesh.height = (selfCollider:Dynamic).shape.height;
+        (playerMesh:Dynamic).mesh.height = (playerCollider:Dynamic).shape.height;
 
         move_and_slide();
 

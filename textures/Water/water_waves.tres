@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://ch47iti10d1r3"]
 
-[ext_resource type="Shader" path="res://assets/shade/Wawa.gdshader" id="1_68q1w"]
+[ext_resource type="Shader" path="res://assets/shd/Wawa.gdshader" id="1_68q1w"]
 
 [sub_resource type="Gradient" id="Gradient_ghh6c"]
 colors = PackedColorArray(0, 0, 1, 1, 1, 1, 1, 1)

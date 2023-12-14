@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://dbid51w20jrk4"]
+
+[node name="Kill" type="CharacterBody3D"]
