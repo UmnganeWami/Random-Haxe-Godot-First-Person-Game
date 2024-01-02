@@ -13,14 +13,14 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
+layout_mode = 1
 offset_right = 1152.0
 offset_bottom = 648.0
 color = Color(0, 0, 0, 0.337255)
 
 [node name="Label2" type="Label" parent="."]
 material = ExtResource("1_tjsee")
-layout_mode = 0
+layout_mode = 1
 offset_right = 1152.0
 offset_bottom = 69.0
 theme = ExtResource("1_o0mpw")
@@ -28,7 +28,8 @@ text = "GAME PAUSED..."
 horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
 offset_top = 576.0
 offset_right = 1152.0
 offset_bottom = 645.0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://dg6cepj5rwf2d"]
 
-[ext_resource type="Script" path="res://out/com_SourceController.gd" id="1_6vhds"]
+[ext_resource type="Script" path="res://out/com_PlayerController.gd" id="1_7qer3"]
 [ext_resource type="Script" path="res://out/com_PausePlayNode.gd" id="2_3n0jw"]
 [ext_resource type="Script" path="res://out/com_HoldRayCast.gd" id="3_oi0qb"]
 [ext_resource type="AudioStream" uid="uid://bkvrlco5ktx8i" path="res://assets/snd/step1.wav" id="4_tg1qj"]
@@ -9,8 +9,10 @@
 [ext_resource type="AudioStream" uid="uid://bg83d1vam3m1f" path="res://assets/snd/jump.wav" id="7_xh08j"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ytgug"]
+radius = 0.6
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_t2kdg"]
+radius = 0.6
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0cqxg"]
 random_pitch = 1.1
@@ -30,8 +32,11 @@ streams_count = 1
 stream_0/stream = ExtResource("7_xh08j")
 stream_0/weight = 1.0
 
-[node name="SourcePlayer" type="CharacterBody3D"]
-script = ExtResource("1_6vhds")
+[node name="PlayerController" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_7qer3")
+metadata/_edit_lock_ = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.553186, 0)
@@ -59,8 +64,8 @@ mesh = SubResource("CapsuleMesh_t2kdg")
 
 [node name="FootStep" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_0cqxg")
-volume_db = -14.214
+volume_db = -8.161
 
 [node name="Jump" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_r3idt")
-volume_db = -21.517
+volume_db = -11.612

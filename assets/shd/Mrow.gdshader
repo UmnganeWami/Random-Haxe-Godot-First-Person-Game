@@ -63,7 +63,7 @@ void fragment() {
     uvPos += (jitter * adjusted_jitter_intensity);
     
     vec4 color = texture(input_texture, uvPos);
-	float OUTLINES = meow(uvPosScaled);
+	float OUTLINES = meow(uvPos);
 	if(OUTLINES >= 0.001 && enable_random_pixel_offsetting){
 		COLOR = color.rgba;
 	}else{

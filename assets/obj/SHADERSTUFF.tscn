@@ -5,11 +5,11 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o77fw"]
 shader = ExtResource("1_5of03")
-shader_parameter/resolution_scale = 0.38
+shader_parameter/resolution_scale = 0.25
 shader_parameter/jitter_intensity = 0.1
-shader_parameter/jitter_interval = 35.987
+shader_parameter/jitter_interval = 59.627
 shader_parameter/enable_random_jitter = true
-shader_parameter/color_limit_amount = 21.058
+shader_parameter/color_limit_amount = 25.0
 shader_parameter/enable_color_limit = true
 shader_parameter/enable_random_pixel_offsetting = false
 
