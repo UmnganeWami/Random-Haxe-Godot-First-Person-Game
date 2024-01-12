@@ -1,20 +1,21 @@
-[gd_scene load_steps=12 format=3 uid="uid://dg6cepj5rwf2d"]
+[gd_scene load_steps=14 format=3 uid="uid://dg6cepj5rwf2d"]
 
-[ext_resource type="Script" path="res://out/com_PlayerController.gd" id="1_7qer3"]
-[ext_resource type="Script" path="res://out/com_PausePlayNode.gd" id="2_3n0jw"]
+[ext_resource type="Script" path="res://out/com_wami_PlayerController.gd" id="1_llk7j"]
 [ext_resource type="Script" path="res://out/com_HoldRayCast.gd" id="3_oi0qb"]
 [ext_resource type="AudioStream" uid="uid://bkvrlco5ktx8i" path="res://assets/snd/step1.wav" id="4_tg1qj"]
 [ext_resource type="AudioStream" uid="uid://ba76ill8y5un6" path="res://assets/snd/step2.wav" id="5_6npje"]
 [ext_resource type="AudioStream" uid="uid://cwet3k34e3njv" path="res://assets/snd/step3.wav" id="6_l4yyx"]
+[ext_resource type="Script" path="res://out/com_wami_PlayerCamera.gd" id="6_uwuyu"]
 [ext_resource type="AudioStream" uid="uid://bg83d1vam3m1f" path="res://assets/snd/jump.wav" id="7_xh08j"]
+[ext_resource type="Script" path="res://out/com_wami_PausePlayNode.gd" id="8_ynlhm"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ytgug"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6xit0"]
 radius = 0.6
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_t2kdg"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ugqap"]
 radius = 0.6
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0cqxg"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_c3cce"]
 random_pitch = 1.1
 random_volume_offset_db = 5.0
 streams_count = 3
@@ -25,47 +26,53 @@ stream_1/weight = 1.0
 stream_2/stream = ExtResource("6_l4yyx")
 stream_2/weight = 1.0
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_r3idt"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_shkqr"]
 random_pitch = 1.25
 random_volume_offset_db = 5.0
 streams_count = 1
 stream_0/stream = ExtResource("7_xh08j")
 stream_0/weight = 1.0
 
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_weomr"]
+margin = 5.0
+length = 0.5
+slide_on_slope = true
+
 [node name="PlayerController" type="CharacterBody3D"]
-collision_layer = 4
-collision_mask = 7
-script = ExtResource("1_7qer3")
-metadata/_edit_lock_ = true
+script = ExtResource("1_llk7j")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.553186, 0)
+[node name="Collider" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_6xit0")
 
-[node name="PausePlayNode" type="Control" parent="Camera3D"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("2_3n0jw")
+[node name="Mesh" type="MeshInstance3D" parent="Collider"]
+mesh = SubResource("CapsuleMesh_ugqap")
 
-[node name="HoldRayCast" type="RayCast3D" parent="Camera3D"]
+[node name="FootStep" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_c3cce")
+volume_db = -8.161
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_shkqr")
+volume_db = -11.612
+
+[node name="StairStepper" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.5, -0.35)
+shape = SubResource("SeparationRayShape3D_weomr")
+
+[node name="PlayerCamera" type="Camera3D" parent="."]
+script = ExtResource("6_uwuyu")
+
+[node name="HoldRayCast" type="RayCast3D" parent="PlayerCamera"]
 target_position = Vector3(0, 0, -5)
 collision_mask = 2
 script = ExtResource("3_oi0qb")
 
-[node name="Hand" type="Marker3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.41543)
+[node name="Hand" type="Marker3D" parent="PlayerCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.62379)
 
-[node name="Collider" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_ytgug")
-
-[node name="Mesh" type="MeshInstance3D" parent="Collider"]
-mesh = SubResource("CapsuleMesh_t2kdg")
-
-[node name="FootStep" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_0cqxg")
-volume_db = -8.161
-
-[node name="Jump" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_r3idt")
-volume_db = -11.612
+[node name="PausePlayNode" type="Control" parent="PlayerCamera"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_ynlhm")

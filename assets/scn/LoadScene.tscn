@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dge4tjc0off5x" path="res://icon.svg" id="1_hbg5p"]
 [ext_resource type="Theme" uid="uid://c2ndbgg2bmacu" path="res://assets/thm/PauseMenuGamePauseText.tres" id="2_tgqy6"]
-[ext_resource type="Script" path="res://out/com_LoadScene.gd" id="3_vtt40"]
+[ext_resource type="Script" path="res://out/com_wami_LoadScene.gd" id="3_um2vm"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -21,4 +21,4 @@ text = "GAME IS LOADING... PLEASE WAIT!"
 horizontal_alignment = 1
 
 [node name="LoadScene" type="Node2D" parent="."]
-script = ExtResource("3_vtt40")
+script = ExtResource("3_um2vm")

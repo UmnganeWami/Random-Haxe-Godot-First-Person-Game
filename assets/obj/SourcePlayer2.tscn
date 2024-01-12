@@ -1,0 +1,80 @@
+[gd_scene load_steps=14 format=3 uid="uid://b7mdbosf1o0ov"]
+
+[ext_resource type="Script" path="res://out/com_PlayerController.gd" id="1_587se"]
+[ext_resource type="Script" path="res://out/com_PlayerCamera.gd" id="2_vfn07"]
+[ext_resource type="Script" path="res://out/com_PausePlayNode.gd" id="3_l6gco"]
+[ext_resource type="Script" path="res://out/com_HoldRayCast.gd" id="4_xw5w8"]
+[ext_resource type="AudioStream" uid="uid://bkvrlco5ktx8i" path="res://assets/snd/step1.wav" id="5_1nq30"]
+[ext_resource type="AudioStream" uid="uid://ba76ill8y5un6" path="res://assets/snd/step2.wav" id="6_skbqa"]
+[ext_resource type="AudioStream" uid="uid://cwet3k34e3njv" path="res://assets/snd/step3.wav" id="7_em7vy"]
+[ext_resource type="AudioStream" uid="uid://bg83d1vam3m1f" path="res://assets/snd/jump.wav" id="8_yk852"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0ibyi"]
+radius = 0.6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_eehff"]
+radius = 0.6
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qr7on"]
+random_pitch = 1.1
+random_volume_offset_db = 5.0
+streams_count = 3
+stream_0/stream = ExtResource("5_1nq30")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("6_skbqa")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("7_em7vy")
+stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mxa2w"]
+random_pitch = 1.25
+random_volume_offset_db = 5.0
+streams_count = 1
+stream_0/stream = ExtResource("8_yk852")
+stream_0/weight = 1.0
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_xgoh3"]
+margin = 5.0
+length = 0.5
+slide_on_slope = true
+
+[node name="PlayerController" type="CharacterBody3D" groups=["PLAYER"]]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_587se")
+
+[node name="PlayerCamera" type="Camera3D" parent="."]
+script = ExtResource("2_vfn07")
+
+[node name="PausePlayNode" type="Control" parent="PlayerCamera"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_l6gco")
+
+[node name="HoldRayCast" type="RayCast3D" parent="PlayerCamera"]
+target_position = Vector3(0, 0, -5)
+collision_mask = 2
+script = ExtResource("4_xw5w8")
+
+[node name="Hand" type="Marker3D" parent="PlayerCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.62379)
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_0ibyi")
+
+[node name="Mesh" type="MeshInstance3D" parent="Collider"]
+mesh = SubResource("CapsuleMesh_eehff")
+
+[node name="FootStep" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_qr7on")
+volume_db = -8.161
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_mxa2w")
+volume_db = -11.612
+
+[node name="StairStepper" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.5, -0.35)
+shape = SubResource("SeparationRayShape3D_xgoh3")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://poo8ffv80d2v"]
+
+[ext_resource type="Script" path="res://out/com_RandomSongPlayer.gd" id="1_kay5s"]
+
+[node name="RandomSongPlayer" type="AudioStreamPlayer3D"]
+volume_db = -6.5
+unit_size = 0.5
+pitch_scale = 0.75
+script = ExtResource("1_kay5s")

@@ -1,18 +1,21 @@
-[gd_resource type="Resource" script_class="QodotFGDClass" load_steps=2 format=3 uid="uid://cbiucwyaxkf6k"]
+[gd_resource type="Resource" script_class="QodotFGDPointClass" load_steps=3 format=3 uid="uid://1yk5yej462g2"]
 
-[ext_resource type="Script" path="res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_class.gd" id="1_pex37"]
+[ext_resource type="PackedScene" uid="uid://dg6cepj5rwf2d" path="res://assets/obj/SourcePlayer.tscn" id="1_3blog"]
+[ext_resource type="Script" path="res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_point_class.gd" id="2_fawgu"]
 
 [resource]
-script = ExtResource("1_pex37")
+script = ExtResource("2_fawgu")
+scene_file = ExtResource("1_3blog")
+apply_rotation_on_map_build = true
 classname = "entity_player"
-description = "the real player"
+description = "the player"
 qodot_internal = false
 base_classes = Array[Resource]([])
 class_properties = {}
 class_property_descriptions = {}
 meta_properties = {
 "color": Color(0.8, 0.8, 0.8, 1),
-"size": AABB(-16, -16, -8, 16, 16, 8)
+"size": AABB(-40, -40, -64, 40, 40, 64)
 }
-node_class = ""
+node_class = "PLR"
 transient_node = false

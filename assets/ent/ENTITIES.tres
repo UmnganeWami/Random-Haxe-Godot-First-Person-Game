@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_file.gd" id="1_1qiub"]
 [ext_resource type="Resource" uid="uid://d10w5cx6xdg0n" path="res://assets/ent/THE_SUN.tres" id="2_wnr62"]
-[ext_resource type="Resource" uid="uid://1yk5yej462g2" path="res://assets/ent/SOURCE_PLR.tres" id="3_bwmy6"]
+[ext_resource type="Resource" uid="uid://1yk5yej462g2" path="res://assets/ent/Player.tres" id="3_bwmy6"]
 
 [resource]
 script = ExtResource("1_1qiub")

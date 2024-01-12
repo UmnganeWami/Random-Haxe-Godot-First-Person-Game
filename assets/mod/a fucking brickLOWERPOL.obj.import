@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://digxnukofcda5"
+path="res://.godot/imported/a fucking brickLOWERPOL.obj-f18c1486311330d176c30ac182e98891.mesh"
+
+[deps]
+
+files=["res://.godot/imported/a fucking brickLOWERPOL.obj-f18c1486311330d176c30ac182e98891.mesh"]
+
+source_file="res://assets/mod/a fucking brickLOWERPOL.obj"
+dest_files=["res://.godot/imported/a fucking brickLOWERPOL.obj-f18c1486311330d176c30ac182e98891.mesh", "res://.godot/imported/a fucking brickLOWERPOL.obj-f18c1486311330d176c30ac182e98891.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=true

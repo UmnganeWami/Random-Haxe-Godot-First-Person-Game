@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ciko0etjihngq"
+path="res://.godot/imported/so calm.ogg-e2d445111a48642e38bc9e36359e5e2e.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/mus/so calm.ogg"
+dest_files=["res://.godot/imported/so calm.ogg-e2d445111a48642e38bc9e36359e5e2e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

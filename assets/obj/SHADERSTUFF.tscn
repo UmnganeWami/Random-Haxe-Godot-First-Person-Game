@@ -5,13 +5,13 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o77fw"]
 shader = ExtResource("1_5of03")
-shader_parameter/resolution_scale = 0.25
-shader_parameter/jitter_intensity = 0.1
-shader_parameter/jitter_interval = 59.627
-shader_parameter/enable_random_jitter = true
-shader_parameter/color_limit_amount = 25.0
-shader_parameter/enable_color_limit = true
-shader_parameter/enable_random_pixel_offsetting = false
+shader_parameter/resolutionScale = 0.35
+shader_parameter/jitterIntensity = 0.5
+shader_parameter/jitterInterval = 60.0
+shader_parameter/enableRandomJitter = true
+shader_parameter/colorLimitAmount = 25.0
+shader_parameter/enableColorLimit = true
+shader_parameter/enableRandomPixelOffsetting = true
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -23,6 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="CROSS" type="TextureRect" parent="."]
 texture_filter = 1

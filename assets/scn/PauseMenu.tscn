@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4dot8ox6qjwf"]
+[gd_scene load_steps=5 format=3 uid="uid://c4dot8ox6qjwf"]
 
 [ext_resource type="Theme" uid="uid://c2ndbgg2bmacu" path="res://assets/thm/PauseMenuGamePauseText.tres" id="1_o0mpw"]
 [ext_resource type="Material" uid="uid://j1sa8gqasync" path="res://TEXTSHADER.tres" id="1_tjsee"]
 [ext_resource type="Theme" uid="uid://drqc2k4xwta5j" path="res://assets/thm/PauseMenuEscToExit.tres" id="2_owtx2"]
+[ext_resource type="Script" path="res://out/com_wami_TiltAmountSlider.gd" id="4_o57v0"]
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
@@ -11,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_horizontal_guides_ = [-80.0]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -36,3 +38,10 @@ offset_bottom = 645.0
 theme = ExtResource("2_owtx2")
 text = "...press escape to unpause"
 horizontal_alignment = 1
+
+[node name="TiltAmountSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_top = 552.0
+offset_right = 344.0
+offset_bottom = 648.0
+script = ExtResource("4_o57v0")
